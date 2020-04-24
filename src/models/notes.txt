@@ -1,0 +1,8 @@
+to create a new model
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+
+
+documentation
+https://sequelize.org/master/manual/migrations.html
+
+the fastest way to update a table is to drop and rerun the seed
