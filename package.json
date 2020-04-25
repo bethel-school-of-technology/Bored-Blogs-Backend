@@ -2,11 +2,7 @@
   "name": "bethel41320-final",
   "version": "0.0.0",
   "scripts": {
-    "start": "node app.js",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "start": "node app.js"
   },
   "private": true,
   "dependencies": {
