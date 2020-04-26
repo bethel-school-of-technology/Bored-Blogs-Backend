@@ -51,7 +51,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-models.sequelize.sync().then(function () {
+models.sequelize.sync({ alter: true }).then(function () {
   console.log("DB Sync'd up")
 });
 
