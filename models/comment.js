@@ -1,14 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Comment = sequelize.define('Comment', {
+  const Comments = sequelize.define('Comments', {
     content: DataTypes.STRING,
     createdAt: {
       type: DataTypes.TIME,
-      defaultValue: DataTypes.NOW
+      defaultValue: sequelize.NOW
     },
     updatedAt: {
       type: DataTypes.TIME,
-      defaultValue: DataTypes.NOW
+      defaultValue: sequelize.NOW
     },
   }, {
     // don't forget to enable timestamps!
@@ -17,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
   }
   );
-  Comment.associate = function (models) {
+  Comments.associate = function (models) {
     //console.log(models);
     // associations can be defined here
-    Comment.hasMany(models.Comment, {});
-    Comment.belongsTo(models.Post, {});
+    Comments.hasMany(models.Comments, {});
+    Comments.belongsTo(models.Posts, {});
   };
-  return Comment;
+  return Comments;
 };

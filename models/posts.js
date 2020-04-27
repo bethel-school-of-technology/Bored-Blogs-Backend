@@ -1,14 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define('Post', {
+  const Posts = sequelize.define('Posts', {
     content: DataTypes.STRING,
     createdAt: {
       type: DataTypes.TIME,
-      defaultValue: DataTypes.NOW
+      allowNull: false,
+      defaultValue: sequelize.NOW
     },
     updatedAt: {
       type: DataTypes.TIME,
-      defaultValue: DataTypes.NOW
+      defaultValue: sequelize.NOW
     },
   }, {
     // don't forget to enable timestamps!
@@ -16,9 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     //parnoid means it won't delete but just say it deleted
     paranoid: true,
   });
-  Post.associate = function (models) {
+  Posts.associate = function (models) {
     // associations can be defined here
-    Post.belongsTo(Post, {})
+    Posts.belongsTo(models.Users, {})
   };
-  return Post;
+  return Posts;
 };

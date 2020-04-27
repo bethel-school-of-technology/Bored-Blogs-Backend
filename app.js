@@ -51,7 +51,9 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-models.sequelize.sync({ alter: true }).then(function () {
+//debating to use sync or migrations
+//https://stackoverflow.com/questions/21105748/sequelize-js-how-to-use-migrations-and-sync
+if (true) models.sequelize.sync({ sync: true }).then(function () {
   console.log("DB Sync'd up")
 });
 

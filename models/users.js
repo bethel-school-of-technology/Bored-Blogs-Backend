@@ -1,10 +1,17 @@
 'use strict';
+const shared = require('../sharedFields');
+
+
+const foo = (seq, data) => {
+  console.log(seq.NOW)
+  return seq.NOW;
+}
+
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-
     },
     //TODO: make this more secured
     //TODO: add comparator to check equality
@@ -20,15 +27,8 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     isAdmin: {
       type: DataTypes.BOOLEAN,
+      allowNull: false,
       defaultValue: false
-    },
-    createdAt: {
-      type: DataTypes.TIME,
-      defaultValue: DataTypes.NOW
-    },
-    updatedAt: {
-      type: DataTypes.TIME,
-      defaultValue: DataTypes.NOW
     },
   }, {
     // don't forget to enable timestamps!
