@@ -3,13 +3,24 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-  models.User.findAll({
-    //include: [models.Task]
-  }).then(function (users) {
-    res.render('index', {
-      title: 'Sequelize: Express Example',
-      users: users
-    });
+  //return res.send('hi');
+  console.log(models.Users);
+  let user = models.Users.findAll({
+  });
+
+  user.then(function (users) {
+    res.send(users)
+  });
+});
+
+router.put('/', function (req, res) {
+  //return res.send('hi');
+  console.log(models.Users);
+  let user = models.Users.findAll({
+  });
+
+  user.then(function (users) {
+    res.send(users)
   });
 });
 
