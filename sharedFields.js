@@ -1,28 +1,25 @@
 'use strict';
 const { Sequelize } = require('sequelize');
-const DataTypes = Sequelize.DataTypes;
 
-
-const foo = (seq, data) => {
-    console.log(seq.NOW)
-    return seq.NOW;
-}
 
 
 module.exports = {
     fields: {
         createdAt: {
-            type: DataTypes.TIME,
-            allowNull: false,
-            defaultValue: foo(Sequelize, DataTypes)
+            type: 'TIMESTAMP',
+            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+            allowNull: false
         },
         updatedAt: {
-            type: DataTypes.TIME,
-            allowNull: false,
-            defaultValue: foo(Sequelize, DataTypes)
+            type: 'TIMESTAMP',
+            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+            allowNull: false
         }
     },
     options: {
-
+        // don't forget to enable timestamps!
+        timestamps: true,
+        //parnoid means it won't delete but just say it deleted
+        paranoid: true,
     }
 };

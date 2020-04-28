@@ -1,4 +1,5 @@
 'use strict';
+//TODO: jacob dont get migrations
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {

@@ -1,20 +1,12 @@
 'use strict';
+const shared = require('../sharedFields');
+
 module.exports = (sequelize, DataTypes) => {
   const Comments = sequelize.define('Comments', {
     content: DataTypes.STRING,
-    createdAt: {
-      type: DataTypes.TIME,
-      defaultValue: sequelize.NOW
-    },
-    updatedAt: {
-      type: DataTypes.TIME,
-      defaultValue: sequelize.NOW
-    },
+    ...shared.fields
   }, {
-    // don't forget to enable timestamps!
-    timestamps: true,
-    //parnoid means it won't delete but just say it deleted
-    paranoid: true,
+    ...shared.options
   }
   );
   Comments.associate = function (models) {
@@ -22,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Comments.hasMany(models.Comments, {});
     Comments.belongsTo(models.Posts, {});
+    Comments.belongsTo(models.Users, {});
   };
   return Comments;
 };

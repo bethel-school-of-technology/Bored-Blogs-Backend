@@ -1,17 +1,15 @@
 'use strict';
 const shared = require('../sharedFields');
+const s = require('sequelize');
 
 
-const foo = (seq, data) => {
-  console.log(seq.NOW)
-  return seq.NOW;
-}
 
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     //TODO: make this more secured
     //TODO: add comparator to check equality
@@ -30,11 +28,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: false
     },
+    ...shared.fields
   }, {
-    // don't forget to enable timestamps!
-    timestamps: true,
-    //parnoid means it won't delete but just say it deleted
-    paranoid: true,
+    ...shared.options
   }
   );
   Users.associate = function (models) {

@@ -1,21 +1,13 @@
 'use strict';
+const shared = require('../sharedFields');
+
 module.exports = (sequelize, DataTypes) => {
   const Posts = sequelize.define('Posts', {
+    title: DataTypes.STRING,
     content: DataTypes.STRING,
-    createdAt: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: sequelize.NOW
-    },
-    updatedAt: {
-      type: DataTypes.TIME,
-      defaultValue: sequelize.NOW
-    },
+    ...shared.fields
   }, {
-    // don't forget to enable timestamps!
-    timestamps: true,
-    //parnoid means it won't delete but just say it deleted
-    paranoid: true,
+    ...shared.options
   });
   Posts.associate = function (models) {
     // associations can be defined here

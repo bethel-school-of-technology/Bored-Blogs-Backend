@@ -10,7 +10,6 @@ var port = 3001;
 
 
 
-var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -31,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use('/users', usersRouter);
+app.use('/users', require('./routes/users'));
 
 
 
@@ -53,7 +52,7 @@ app.use(function (err, req, res, next) {
 
 //debating to use sync or migrations
 //https://stackoverflow.com/questions/21105748/sequelize-js-how-to-use-migrations-and-sync
-if (true) models.sequelize.sync({ sync: true }).then(function () {
+if (true) models.sequelize.sync({ force: true }).then(function () {
   console.log("DB Sync'd up")
 });
 

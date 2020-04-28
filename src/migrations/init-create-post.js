@@ -1,5 +1,4 @@
 'use strict';
-//TODO: jacob dont get migrations
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Posts', {
@@ -12,7 +11,14 @@ module.exports = {
       content: {
         type: Sequelize.STRING
       },
-      
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     });
   },
   down: (queryInterface, Sequelize) => {
