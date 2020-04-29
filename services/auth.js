@@ -3,12 +3,11 @@ const models = require('../models/index');
 const bcrypt = require("bcryptjs");
 
 var authService = {
-  signUser: function(user) {
+  signUser: function (user) {
     const token = jwt.sign(
       {
         Username: user.Username,
-        UserId: user.UserId,
-        Admin: user.Admin
+        UserId: user.UserId
       },
       'secretkey',
       {
@@ -17,7 +16,6 @@ var authService = {
     );
     return token;
   },
-
   verifyUser: function (token) {  //<--- receive JWT token as parameter
     try {
       let decoded = jwt.verify(token, 'secretkey'); //<--- Decrypt token using same key used to encrypt
@@ -27,7 +25,7 @@ var authService = {
       return null;
     }
   },
-  hashPassword: function(plainTextPassword) {
+  hashPassword: function (plainTextPassword) {
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(plainTextPassword, salt);
     return hash;

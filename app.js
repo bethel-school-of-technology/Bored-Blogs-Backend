@@ -4,12 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var models = require('./models');
-var passport = require('passport');  // <--- Add this code to your declarations
 var session = require('express-session'); // <--- Add this code to your declarations
+var cors = require('cors');
+
 var port = 3001;
-
-
-
 
 var app = express();
 
@@ -19,6 +17,7 @@ var app = express();
 
 
 app.use(logger('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -26,11 +25,9 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({ secret: 'perilous journey' }));
-app.use(passport.initialize());
-app.use(passport.session());
+//do we need passport when auth?
 
-
-app.use('/users', require('./routes/users'));
+app.use('/', require('./routes/users'));
 
 
 

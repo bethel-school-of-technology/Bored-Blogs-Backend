@@ -1,5 +1,5 @@
 'use strict';
-const shared = require('../sharedFields');
+const shared = require('../shared');
 
 module.exports = (sequelize, DataTypes) => {
   const Comments = sequelize.define('Comments', {

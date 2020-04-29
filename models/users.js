@@ -1,7 +1,6 @@
 'use strict';
-const shared = require('../sharedFields');
-const s = require('sequelize');
-
+const shared = require('../shared');
+const authService = require('../services/auth'); //<--- Add authentication service
 
 
 module.exports = (sequelize, DataTypes) => {
@@ -18,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       set(val) {
         //TODO: Hash the value
-        this.setDataValue('password', val);
+        //authService.hashPassword(req.body.password)
+        this.setDataValue('password', authService.hashPassword(val));
       }
     },
     firstName: DataTypes.STRING,
