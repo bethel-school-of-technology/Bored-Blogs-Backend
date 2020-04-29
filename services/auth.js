@@ -1,25 +1,32 @@
+var models = require('../models');
+var Users = models.Users;
 const jwt = require('jsonwebtoken');
-const models = require('../models/index');
 const bcrypt = require("bcryptjs");
-
+const secretKey = 'secretkey';
+//use this class to handle authetication
 var authService = {
   signUser: function (user) {
+    //console.log("signIn user");
+    //console.log(user)
+    //console.log("userId:" + user.id);
     const token = jwt.sign(
       {
-        Username: user.Username,
-        UserId: user.UserId
+        email: user.email,
+        UserId: user.id
       },
-      'secretkey',
+      secretKey,
       {
         expiresIn: '1h'
       }
     );
     return token;
   },
-  verifyUser: function (token) {  //<--- receive JWT token as parameter
+  //call back (err, decoded) =>
+  verifyUser: function (token, callBackFunction) {  //<--- receive JWT token as parameter
     try {
-      let decoded = jwt.verify(token, 'secretkey'); //<--- Decrypt token using same key used to encrypt
-      return models.users.findByPk(decoded.UserId); //<--- Return result of database query as promise
+      return jwt.verify(token, secretKey, callBackFunction);
+      //let decoded = jwt.verify(token, secretKey, passInFunction); //<--- Decrypt token using same key used to encrypt      
+      //return Users.findByPk(decoded.UserId); //<--- Return result of database query as promise
     } catch (err) {
       console.log(err);
       return null;

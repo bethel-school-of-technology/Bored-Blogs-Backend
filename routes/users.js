@@ -10,43 +10,11 @@ const defaultErr = (err, res) => {
   res.send(err.toString());
 };
 
-router.get('/profile', function (req, res, next) {
-  let token = req.cookies.jwt;
-  if (token) {
-    //when token expires bad things happen
-    var foo = authService.verifyUser(token);
-    console.log(foo);
-    if (foo != null) {
-      foo.then(user => {
-        if (user) {
-          //put code here
-          //todo add code to make posts here
-          Users.findOne({
-            where: { email: req.body.email }
-          })
-            .then(p => {
-              res.send(p)
-            });
-        } else {
-          res.status(401);
-          res.send('Invalid authentication token');
-        }
-      })
-    } else {
-      res.status(401);
-      res.send('Token expired');
-    };
-  } else {
-    res.status(401);
-    res.send('Must be logged in');
-  }
-});
-
-
 router.route('/users')
   //create a new user at http://localhost:3001/users with post
   .post((req, res, next) => {
-    console.log(req.body)
+    //console.log(req.body)
+    console.log(Users);
     Users
       .create({
         firstName: req.body.firstName,
@@ -60,31 +28,62 @@ router.route('/users')
       }).catch(e => defaultErr(e, res))
   });//end post
 
-router.get('/logout', function (req, res, next) {
-  res.cookie('jwt', "", { expires: new Date(0) });
-  res.send('Logged out');
-});
 
 
 router.post('/login', function (req, res) {
   var bod = req.body;
   //console.log(req);
-  console.log(bod);
+  //console.log(bod);
   Users.findOne({
     where: { email: req.body.email }
   }).then(user => {
     if (user == null) {
       res.status(404);
       res.send("User not found");
-    }
-    if (authService.comparePasswords(req.body.password, user.password)) {
-      //TODO: give a token or something
-      res.send("you win");
+    } else if (authService.comparePasswords(req.body.password, user.password)) {
+      //you'll need this for later
+      var bearToken = authService.signUser(user);
+      res.json(bearToken);
     } else {
       res.send("authentication failed. bad password.");
     }
   }).catch(e => defaultErr(e, res));
 })
+
+//trust but verify
+router.post('/verify', function (req, res) {
+  //console.log(req.headers);
+  console.log(req.headers.auth);
+  authService.verifyUser(req.headers.auth, (err, decoded) => {
+    if (err) {
+      res.send(err);
+    }
+    res.send(decoded)
+  });
+});
+
+
+
+//TODO: refactor into custom middleware
+router.get('/profile', function (req, res, next) {
+  let token = req.headers.auth;
+  if (token) {
+    //when token expires bad things happen
+    authService.verifyUser(token,
+      (err, deocoded) => {
+        
+      }
+    );
+
+
+  } else {
+    res.status(401);
+    res.send('needs aut:token');
+  }
+});
+
+
+
 
 
 

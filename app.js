@@ -27,6 +27,8 @@ app.use(cookieParser());
 app.use(session({ secret: 'perilous journey' }));
 //do we need passport when auth?
 
+
+
 app.use('/', require('./routes/users'));
 
 
