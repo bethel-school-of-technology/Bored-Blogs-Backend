@@ -10,7 +10,7 @@ const defaultErr = (err, res) => {
   res.send(err.toString());
 };
 
-router.route('/users')
+router.route('/users/register')
   //create a new user at http://localhost:3001/users with post
   .post((req, res, next) => {
     //console.log(req.body)
@@ -23,32 +23,34 @@ router.route('/users')
         password: (req.body.password) //<--- Password is hashed on model        
       })
       .then((newUser) => {
-        //TODO: sign in the user when it is created
+        newUser = newUser.dataValues;
+        newUser = { ...newUser, token: authService.signUser(newUser) }
+        console.log(newUser)
         res.json(newUser);
       }).catch(e => defaultErr(e, res))
   });//end post
 
 
 
-router.post('/login', function (req, res) {
-  var bod = req.body;
-  //console.log(req);
-  //console.log(bod);
-  Users.findOne({
-    where: { email: req.body.email }
-  }).then(user => {
-    if (user == null) {
-      res.status(404);
-      res.send("User not found");
-    } else if (authService.comparePasswords(req.body.password, user.password)) {
-      //you'll need this for later
-      var bearToken = authService.signUser(user);
-      res.json(bearToken);
-    } else {
-      res.send("authentication failed. bad password.");
-    }
-  }).catch(e => defaultErr(e, res));
-})
+router.route('/users/login')
+  .post(function (req, res) {
+    //console.log(req);
+    Users.findOne({
+      where: { email: req.body.email }
+    }).then(user => {
+      if (user == null) {
+        console.log(user)
+        res.status(410);
+        res.send("User not found");
+      } else if (authService.comparePasswords(req.body.password, user.password)) {
+        //you'll need this for later
+
+        res.json({ ...user, token: authService.signUser(user) });
+      } else {
+        res.send("authentication failed. bad password.");
+      }
+    }).catch(e => defaultErr(e, res));
+  })
 
 //trust but verify
 router.post('/verify', function (req, res) {
@@ -58,33 +60,25 @@ router.post('/verify', function (req, res) {
     if (err) {
       res.send(err);
     }
-    res.send(decoded)
+    res.send(decoded);
   });
 });
-
 
 
 //TODO: refactor into custom middleware
 router.get('/profile', function (req, res, next) {
   let token = req.headers.auth;
   if (token) {
-    //when token expires bad things happen
+    //! when token expires bad things happen
     authService.verifyUser(token,
       (err, deocoded) => {
-        
+        //TODO: add
       }
     );
-
-
   } else {
     res.status(401);
     res.send('needs aut:token');
   }
 });
-
-
-
-
-
 
 module.exports = router;

@@ -3,6 +3,7 @@ var Users = models.Users;
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcryptjs");
 const secretKey = 'secretkey';
+
 //use this class to handle authetication
 var authService = {
   signUser: function (user) {
@@ -38,7 +39,7 @@ var authService = {
     return hash;
   },
   comparePasswords: function (plainTextPassword, hashedPassword) {
-    return bcrypt.compareSync(plainTextPassword, hashedPassword)
+    return bcrypt.compareSync(plainTextPassword, hashedPassword);
   }
 }
 

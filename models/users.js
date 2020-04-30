@@ -1,8 +1,6 @@
 'use strict';
 const shared = require('../shared');
 const authService = require('../services/auth'); //<--- Add authentication service
-
-
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
     email: {
@@ -10,19 +8,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    //TODO: make this more secured
-    //TODO: add comparator to check equality
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       set(val) {
-        //TODO: Hash the value
-        //authService.hashPassword(req.body.password)
         this.setDataValue('password', authService.hashPassword(val));
       }
     },
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
+    bio: DataTypes.STRING,
     isAdmin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
