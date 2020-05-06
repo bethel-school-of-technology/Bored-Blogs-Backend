@@ -27,7 +27,10 @@ router.route('/users/register')
         newUser = { ...newUser, token: authService.signUser(newUser) }
         console.log(newUser)
         res.json(newUser);
-      }).catch(e => defaultErr(e, res))
+      }).catch(e => {
+        res.status(403);
+        res.send("malform post");
+      })
   });//end post
 
 

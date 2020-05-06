@@ -1,4 +1,9 @@
 'use strict';
+/**
+ * this file scans the folder so all the models can be 
+ */
+
+
 
 const fs = require('fs');
 const path = require('path');
