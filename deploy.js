@@ -1,4 +1,5 @@
-let app_folder_name = 'Bored-Blogs-Backend';
+const path = require('path');
+let app_folder_name = path.basename(__filename);
 //! u need the private key ask jacob for it!
 let privateKey = '../bethel_final.pem';
 // TODO: ADD YOUR IP ADDRESS BELOW (e.g. '12.34.5.67')

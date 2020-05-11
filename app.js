@@ -24,7 +24,7 @@ app.use(session({ secret: 'perilous journey' }));
 //do we need passport when auth?
 
 
-
+//!registering all the endpoints here!
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/posts'));
 app.use('/', require('./routes/comments'));

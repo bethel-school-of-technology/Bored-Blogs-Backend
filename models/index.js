@@ -1,6 +1,6 @@
 'use strict';
 /**
- * this file scans the folder so all the models can be 
+ * this index.js scans the folder so sequelize can know all the models
  */
 
 

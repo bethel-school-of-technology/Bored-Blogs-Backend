@@ -41,8 +41,8 @@ function authenticateUserAndToken(req, res, lambda) {
 
 router.route('/posts')
     .get(function (req, res) {
-        Posts.then(function (Posts) {
-            res.send(Posts)
+        Posts.findAll().then(function (mPosts) {
+            res.send(mPosts)
         });
     })
     //to add a post
