@@ -1,4 +1,4 @@
-let app_folder_name = 'riot-express-todo-list';
+let app_folder_name = 'Bored-Blogs-Backend';
 //! u need the private key ask jacob for it!
 let privateKey = '../bethel_final.pem';
 // TODO: ADD YOUR IP ADDRESS BELOW (e.g. '12.34.5.67')
@@ -104,7 +104,7 @@ function restartRemoteServices() {
 // connect to the remote server
 function sshConnect() {
     console.log('Connecting to the server...');
-    
+
     ssh
         .connect({
             host: host,

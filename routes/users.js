@@ -14,7 +14,7 @@ router.route('/users/register')
   //create a new user at http://localhost:3001/users with post
   .post((req, res, next) => {
     //console.log(req.body)
-    console.log(Users);
+    //console.log(Users);
     Users
       .create({
         firstName: req.body.firstName,
@@ -23,8 +23,7 @@ router.route('/users/register')
         password: (req.body.password) //<--- Password is hashed on model        
       })
       .then((newUser) => {
-        newUser = newUser.dataValues;
-        newUser = { ...newUser, token: authService.signUser(newUser) }
+        newUser = { ...newUser.dataValues, token: authService.signUser(newUser) }
         console.log(newUser)
         res.json(newUser);
       }).catch(e => {
@@ -69,7 +68,7 @@ router.post('/verify', function (req, res) {
 
 
 //TODO: refactor into custom middleware
-router.get('/profile', function (req, res, next) {
+router.get('users/profile', function (req, res, next) {
   let token = req.headers.auth;
   if (token) {
     //! when token expires bad things happen
@@ -83,5 +82,16 @@ router.get('/profile', function (req, res, next) {
     res.send('needs aut:token');
   }
 });
+router.get('users/contributors', function (req, res, next) {
+  Users.findAll({
+    attributes: [
+      'firstName',
+      'lastName',
+      'bio',
+    ]
+  })
+  res.json();
+});
+
 
 module.exports = router;

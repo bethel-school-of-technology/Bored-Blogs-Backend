@@ -26,6 +26,8 @@ app.use(session({ secret: 'perilous journey' }));
 
 
 app.use('/', require('./routes/users'));
+app.use('/', require('./routes/posts'));
+app.use('/', require('./routes/comments'));
 
 
 
@@ -47,6 +49,8 @@ app.use(function (err, req, res, next) {
 
 //debating to use sync or migrations
 //https://stackoverflow.com/questions/21105748/sequelize-js-how-to-use-migrations-and-sync
+
+//when we change models we have to manual adjust the db
 if (true) models.sequelize.sync({ force: true }).then(function () {
   console.log("DB Sync'd up")
 });
