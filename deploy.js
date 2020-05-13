@@ -1,5 +1,5 @@
 const path = require('path');
-let app_folder_name = path.basename(__filename);
+let app_folder_name = 'Bored-Blogs-Backend';
 //! u need the private key ask jacob for it!
 let privateKey = '../bethel_final.pem';
 // TODO: ADD YOUR IP ADDRESS BELOW (e.g. '12.34.5.67')
@@ -7,11 +7,10 @@ let host = 'ec2-52-91-103-255.compute-1.amazonaws.com';
 
 
 //npm install node-cmd node-ssh
-var cmd = require('node-cmd');
-var path, node_ssh, ssh, fs;
+var cmd = require('C:/Program Files/nodejs/node_modules/node-cmd');
+var node_ssh, ssh, fs;
 fs = require('fs');
-path = require('path');
-node_ssh = require('node-ssh');
+node_ssh = require('C:/Program Files/nodejs/node_modules/node-ssh');
 ssh = new node_ssh();
 
 // the method that starts the deployment process
