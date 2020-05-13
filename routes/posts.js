@@ -34,4 +34,18 @@ router.route('/posts')
         })
     });
 
+router.get('/posts/read:postId', function (req, res) {
+    //TODO: join author on author id
+    console.log(req.params.postId)
+    Posts.findOne(
+        {
+            where: {
+                id: req.params.postId
+            }
+        }
+    ).then(function (mPosts) {
+        res.json(mPosts)
+    });
+})
+
 module.exports = router;
