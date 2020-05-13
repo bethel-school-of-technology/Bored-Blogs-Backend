@@ -37,6 +37,7 @@ router.route('/users/register')
 
 router.route('/users/login')
   .post(function (req, res) {
+    console.log("Something fishy");
     //console.log(req);
     var email = req.body.email;
     if (email == null || req.body.password == null) {
