@@ -1,68 +1,37 @@
-var Posts = require('../models').Posts;
+const Posts = require('../models').Posts;
+const Users = require('../models').Users;
 var express = require('express');
 var router = express.Router();
-var authService = require('../services/auth'); //<--- Add authentication service
-
-
-
-//TODO: rewrite this the normal way
-//needs tooken in {token:tpken}
-
-//authService.verifyUser(req.body.token).then(user=>{});
-function authenticateUserAndToken(req, res, lambda) {
-    let token = req.body.token;
-    if (token) {
-        //when token expires bad things happen
-        var foo = authService.verifyUser(token);
-        //console.log(foo);
-        if (foo != null) {
-            foo.then(user => {
-                if (user) {
-                    //call lambda
-                    lambda(user);
-                } else {
-                    res.status(401);
-                    res.send('Invalid authentication token');
-                }
-            })
-        } else {
-            res.status(401);
-            res.send('Token expired');
-        };
-    } else {
-        res.status(401);
-        res.send('Must be logged in');
-    }
-}
-
-
+const authService = require('../services/auth'); //<--- Add authentication service
+const util = require('./shareFunction');
 
 
 
 router.route('/posts')
     .get(function (req, res) {
+        //TODO: join author on author id
         Posts.findAll().then(function (mPosts) {
-            res.send(mPosts)
+            res.json(mPosts)
         });
     })
     //to add a post
     .post(function (req, res) {
-        authenticateUserAndToken(req, res, user => {
-            var bod = req.body;
-            //console.log(req);
-            console.log(bod);
+        //sweep that ugly code under the rug where it belongs
+        //console.log(req.headers.auth)
+        util.authenticateAdmin(req, res, (req, res, admin) => {
+            //i thing await is to synchronize
+            //could use then i guess but i do like await more
+            //await crashes app>
+            var form = req.body;
+            //console.log(admin)
             Posts.create({
-                title: bod.title,
-                content: bod.content
-            }).then(newPost => {
-                //on success
-                res.send(`New post ${newPost.title}, with id ${newPost.id} has been created.`);
-            }).catch(function (err) {
-                // handle error;
-                res.status(500)
-                res.send(err)
-            });
-        });
+                title: form.title,
+                body: form.body,
+                authorId: admin.id
+            }).then(theNewPost => {
+                res.json(theNewPost);
+            })
+        })
     });
 
 module.exports = router;

@@ -7,13 +7,18 @@ module.exports = {
       Return a promise to correctly handle asynchronicity.     
 
     */
-    return queryInterface.bulkInsert('Users', [{
-      firstName: 'John',
-      lastName: 'Doe',
-      //isAdmin: true,
-      email: 'john@doe.com',
-      password: 'password'
-    }], {
+    return queryInterface.bulkInsert('Posts', [
+      {
+        title: 'test1',
+        body: 'my body',
+        authorId: 1
+      },
+      {
+        title: 'test2',
+        body: 'my body2',
+        authorId: 1
+      }
+    ], {
 
     });
   },
@@ -27,7 +32,7 @@ module.exports = {
       return queryInterface.bulkDelete('People', null, {});
     */
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Users', null, {});
+      return queryInterface.bulkDelete('Posts', null, {});
     }
   }
 };

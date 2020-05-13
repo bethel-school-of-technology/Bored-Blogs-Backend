@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: false
     },
+    style: {
+      type: DataTypes.STRING,
+    },
     ...shared.fields
   }, {
     ...shared.options

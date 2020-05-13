@@ -14,7 +14,7 @@ router.route('/users/register')
   //create a new user at http://localhost:3001/users with post
   .post((req, res, next) => {
     //console.log(req.body)
-    //console.log(Users);
+    console.log(Users);
     Users
       .create({
         firstName: req.body.firstName,
@@ -23,7 +23,8 @@ router.route('/users/register')
         password: (req.body.password) //<--- Password is hashed on model        
       })
       .then((newUser) => {
-        newUser = { ...newUser.dataValues, token: authService.signUser(newUser) }
+        newUser = newUser.dataValues;
+        newUser = { ...newUser, token: authService.signUser(newUser) }
         console.log(newUser)
         res.json(newUser);
       }).catch(e => {
@@ -37,17 +38,20 @@ router.route('/users/register')
 router.route('/users/login')
   .post(function (req, res) {
     //console.log(req);
+    var email = req.body.email;
+    if (email == null || req.body.password == null) {
+      res.status(403).send('body missing email or password. is the form missing some fields?')
+    }
     Users.findOne({
-      where: { email: req.body.email }
+      where: { email: email }
     }).then(user => {
       if (user == null) {
-        console.log(user)
-        res.status(410);
-        res.send("User not found");
+        //console.log(user)
+        res.status(410).send("User not found");
       } else if (authService.comparePasswords(req.body.password, user.password)) {
         //you'll need this for later
-
-        res.json({ ...user, token: authService.signUser(user) });
+        console.log(user.dataValues)
+        res.json({ ...user.dataValues, token: authService.signUser(user) });
       } else {
         res.send("authentication failed. bad password.");
       }
@@ -56,42 +60,64 @@ router.route('/users/login')
 
 //trust but verify
 router.post('/verify', function (req, res) {
+  var token = req.headers.auth;
   //console.log(req.headers);
-  console.log(req.headers.auth);
-  authService.verifyUser(req.headers.auth, (err, decoded) => {
+  console.log(token);
+  authService.verifyUser(token, (err, decoded) => {
     if (err) {
       res.send(err);
+    } else {
+      console.log(decoded)
+      res.send("succes");
     }
-    res.send(decoded);
   });
 });
 
-
-//TODO: refactor into custom middleware
-router.get('users/profile', function (req, res, next) {
-  let token = req.headers.auth;
-  if (token) {
-    //! when token expires bad things happen
-    authService.verifyUser(token,
-      (err, deocoded) => {
-        //TODO: add
-      }
-    );
-  } else {
-    res.status(401);
-    res.send('needs aut:token');
-  }
-});
-router.get('users/contributors', function (req, res, next) {
+router.get('/users/contributors', function (req, res, next) {
   Users.findAll({
+    where: {
+      isAdmin: true
+    },
     attributes: [
       'firstName',
       'lastName',
       'bio',
+      'style',
     ]
-  })
-  res.json();
+  }).then(
+    contribs => {
+      res.json(contribs);
+    }
+  ).catch(e => defaultErr(e, res))
+
 });
+
+//TODO: refactor into custom middleware
+router.get('/users/profile', function (req, res, next) {
+  let token = req.headers.auth;
+  console.log(token)
+  if (token) {
+    //! when token expires bad things happen
+    authService.verifyUser(token,
+      (err, decoded) => {
+        //TODO: add
+        Users.findOne({
+          where: {
+            id: decoded.UserId
+          }
+        }).then(
+          user => {
+            res.json(user.dataValues)
+          }
+        )
+      }
+    );
+  } else {
+    res.status(401);
+    res.send('needs auth:token in headers');
+  }
+});
+
 
 
 module.exports = router;
