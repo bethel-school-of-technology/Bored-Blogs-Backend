@@ -47,5 +47,29 @@ router.get('/posts/read:postId', function (req, res) {
         res.json(mPosts)
     });
 })
-
+router.post('/posts/update:postId', function (req, res) {
+    util.authenticateAdmin(req, res, (req, res, admin) => {
+        Posts.findOne({
+            where: {
+                id: req.params.postId
+            }
+        }).then(post => {
+            var form = req.body;
+            const updoot = (key) => {
+                //save some code
+                if (form[key] != null) {
+                    post[key] = form[key];
+                }
+            }
+            console.log(post)
+            updoot('title')
+            updoot('body')
+            updoot('authorId')
+            console.log(post)
+            post.save().then(e => {
+                res.json(post);
+            })
+        })
+    })
+})
 module.exports = router;
