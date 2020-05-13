@@ -36,7 +36,9 @@ router.route('/users/register')
 
 router.route('/users/login')
   .post(function (req, res) {
+    console.log("Something fishy");
     //console.log(req);
+    console.log(req.body);
     Users.findOne({
       where: { email: req.body.email }
     }).then(user => {
@@ -47,7 +49,7 @@ router.route('/users/login')
       } else if (authService.comparePasswords(req.body.password, user.password)) {
         //you'll need this for later
 
-        res.json({ ...user, token: authService.signUser(user) });
+        res.json({ ...user.dataValues, token: authService.signUser(user) });
       } else {
         res.send("authentication failed. bad password.");
       }
