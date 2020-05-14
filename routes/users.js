@@ -100,8 +100,7 @@ router.get('/users/profile', function (req, res, next) {
   if (token) {
     //! when token expires bad things happen
     authService.verifyUser(token,
-      (err, decoded) => {
-        //TODO: add
+      (err, decoded) => {        
         Users.findOne({
           where: {
             id: decoded.UserId

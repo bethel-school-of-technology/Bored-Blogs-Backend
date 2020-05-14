@@ -17,9 +17,11 @@ module.exports = (sequelize, DataTypes) => {
   Comments.associate = function (models) {
     //console.log(models);
     // associations can be defined here
-    Comments.hasMany(models.Comments, {});
+    Comments.hasMany(models.Comments, {
+      as: 'parentComment'
+    });
     Comments.belongsTo(models.Posts, {
-      allowNull: false
+      as: 'parentPost'
     });
     Comments.belongsTo(models.Users, { as: 'author' });
   };

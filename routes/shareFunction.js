@@ -7,6 +7,13 @@ const Users = require('../models').Users;
 //needs tooken in headers:{auth:tpken}
 module.exports = {
     authenticateAdmin(req, res, lambda) {
+        this.authenticateUser(req, res, user => {
+            if (user.isAdmin) {
+                return lambda(req, res, user);
+            } else res.status('403').send('user is not an admin');
+        });
+    },
+    authenticateUser(req, res, lambda) {
         let token = req.headers.auth;
         if (token != null) {
             //when token expires bad things happen
@@ -22,9 +29,7 @@ module.exports = {
                         }
                     }).then(
                         user => {
-                            if (user.isAdmin) {
-                                return lambda(req, res, user);
-                            } else res.status('403').send('user is not an admin');
+                            return lambda(req, res, user);
                         }
                     ).catch(function (err) {
                         // handle error;

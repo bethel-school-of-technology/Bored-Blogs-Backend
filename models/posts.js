@@ -5,6 +5,8 @@ module.exports = (sequelize, DataTypes) => {
   const Posts = sequelize.define('Posts', {
     title: DataTypes.STRING,
     body: DataTypes.STRING,
+    //TODO: 
+    //status
     published: {
       type: 'TIMESTAMP',
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
