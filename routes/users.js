@@ -1,8 +1,9 @@
 var Users = require('../models').Users;
 var express = require('express');
 var router = express.Router();
-const shared = require('../shared')
 const authService = require('../services/auth'); //<--- Add authentication service
+
+
 
 const defaultErr = (err, res) => {
   // handle error;
@@ -48,13 +49,13 @@ router.route('/users/login')
     }).then(user => {
       if (user == null) {
         //console.log(user)
-        res.status(410).send("User not found");
+        res.status(404).send("User not found");
       } else if (authService.comparePasswords(req.body.password, user.password)) {
         //you'll need this for later
         console.log(user.dataValues)
         res.json({ ...user.dataValues, token: authService.signUser(user) });
       } else {
-        res.send("authentication failed. bad password.");
+        res.status(418).send("authentication failed. bad password.");
       }
     }).catch(e => defaultErr(e, res));
   })

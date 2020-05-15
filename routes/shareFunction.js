@@ -1,11 +1,11 @@
 const authService = require('../services/auth'); //<--- Add authentication service
-const Posts = require('../models').Posts;
 const Users = require('../models').Users;
 
 //also could be movet elsewhere
 //TODO: rewrite this the normal way
 //needs tooken in headers:{auth:tpken}
 module.exports = {
+    //lambda is jacobism
     authenticateAdmin(req, res, lambda) {
         this.authenticateUser(req, res, user => {
             if (user.isAdmin) {
