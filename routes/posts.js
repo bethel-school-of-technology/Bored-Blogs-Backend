@@ -6,19 +6,28 @@ const authService = require('../services/auth'); //<--- Add authentication servi
 const util = require('./shareFunction');
 
 
+const defaultErr = (err, res) => {
+    // handle error;
+    res.status(500);
+    res.send(err.toString());
+};
 
 router.route('/posts')
     .get(function (req, res) {
-        //TODO: join author on author id
-        Posts.findAll().then(function (mPosts) {
+        //TOD0NE joined author on author id
+        Posts.findAll({
+            include: [
+                util.thingy_that_i_want_to_call_foo
+            ]
+        }).then(function (mPosts) {
             res.json(mPosts)
-        });
+        }).catch(e => defaultErr(e, res));
     })
     //to add a post
     .post(function (req, res) {
         //sweep that ugly code under the rug where it belongs
         //console.log(req.headers.auth)
-        util.authenticateAdmin(req, res, (req, res, admin) => {
+        util.authenticateAdmin(req, res, (admin) => {
             //i thing await is to synchronize
             //could use then i guess but i do like await more
             //await crashes app>
@@ -30,7 +39,7 @@ router.route('/posts')
                 authorId: admin.id
             }).then(theNewPost => {
                 res.json(theNewPost);
-            })
+            }).catch(e => defaultErr(e, res))
         })
     });
 
@@ -41,11 +50,14 @@ router.get('/posts/read:postId', function (req, res) {
         {
             where: {
                 id: req.params.postId
-            }
+            },
+            include: [
+                util.thingy_that_i_want_to_call_foo
+            ]
         }
     ).then(function (mPosts) {
         res.json(mPosts)
-    });
+    }).catch(e => defaultErr(e, res));
 })
 router.post('/posts/update:postId', function (req, res) {
     util.authenticateAdmin(req, res, (req, res, admin) => {
@@ -61,15 +73,15 @@ router.post('/posts/update:postId', function (req, res) {
                     post[key] = form[key];
                 }
             }
-            console.log(post)
+            //console.log(post)
             updoot('title')
             updoot('body')
             updoot('authorId')
-            console.log(post)
+            //console.log(post)
             post.save().then(e => {
-                res.json(post);
+                res.json(e);
             })
-        })
+        }).catch(e => defaultErr(e, res))
     })
 })
 module.exports = router;

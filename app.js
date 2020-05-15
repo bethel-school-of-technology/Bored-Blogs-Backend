@@ -28,7 +28,6 @@ app.use(session({ secret: 'perilous journey' }));
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/posts'));
 app.use('/', require('./routes/comments'));
-app.use('/', require('./routes/test'));
 
 
 
@@ -54,7 +53,7 @@ app.use(function (err, req, res, next) {
 //when we change models we have to manual adjust the db
 var flip = true;
 
-if (!false) models.sequelize.sync({ alter: !flip, force: flip }).then(function () {
+if (false) models.sequelize.sync({ alter: !flip, force: flip }).then(function () {
   console.log("DB Sync'd up")
 });
 

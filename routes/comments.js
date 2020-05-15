@@ -18,10 +18,12 @@ router.route('/comments/create:postId')
     .post(function (req, res) {
         util.authenticateUser(req, res, user => {
             var form = req.body;
-            //console.log(admin)
+            console.log(form);
             Comments.create({
                 body: form.body,
-                parentPostId: req.params.postId
+                parentPostId: req.params.postId,
+                CommentId: form.CommentId,
+                authorId: user.id
             }).then(theNewComment => {
                 res.json(theNewComment);
             }).catch(e => defaultErr(e, res))
@@ -33,10 +35,12 @@ router.get('/comments/read:postId', function (req, res) {
         where: {
             parentPostId: req.params.postId
         },
-        inclide:[Users]
+        inclide: [
+            util.thingy_that_i_want_to_call_foo
+        ]
     }).then(
         c => {
-            
+
             res.json(c)
         }
     ).catch(e => defaultErr(e, res))

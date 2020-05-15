@@ -28,10 +28,7 @@ router.route('/users/register')
         newUser = { ...newUser, token: authService.signUser(newUser) }
         console.log(newUser)
         res.json(newUser);
-      }).catch(e => {
-        res.status(403);
-        res.send("malform post");
-      })
+      }).catch(e => defaultErr(e, res))
   });//end post
 
 
@@ -101,7 +98,8 @@ router.get('/users/profile', function (req, res, next) {
   if (token) {
     //! when token expires bad things happen
     authService.verifyUser(token,
-      (err, decoded) => {        
+      (decoded) => {
+        console.log(decoded)
         Users.findOne({
           where: {
             id: decoded.UserId
@@ -110,7 +108,7 @@ router.get('/users/profile', function (req, res, next) {
           user => {
             res.json(user.dataValues)
           }
-        )
+        ).catch(e => defaultErr(e, res))
       }
     );
   } else {

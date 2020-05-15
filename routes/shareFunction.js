@@ -3,13 +3,26 @@ const Users = require('../models').Users;
 
 //also could be movet elsewhere
 //TODO: rewrite this the normal way
-//needs tooken in headers:{auth:tpken}
+//needs token in headers:{auth:token}
 module.exports = {
+    //to be used with sequel join
+    //
+    thingy_that_i_want_to_call_foo: {
+        model: Users,
+        as: 'author',
+        //we only want these field we shouldnt be giving away our hashed passwords
+        attributes: [
+            'firstName',
+            'lastName',
+            'bio',
+            'style',
+        ]
+    },
     //lambda is jacobism
     authenticateAdmin(req, res, lambda) {
         this.authenticateUser(req, res, user => {
             if (user.isAdmin) {
-                return lambda(req, res, user);
+                return lambda(user);
             } else res.status('403').send('user is not an admin');
         });
     },
@@ -29,19 +42,17 @@ module.exports = {
                         }
                     }).then(
                         user => {
-                            return lambda(req, res, user);
+                            return lambda(user);
                         }
                     ).catch(function (err) {
                         // handle error;
                         console.log(err)
-                        res.status(500)
-                        res.send(err)
+                        res.status(500).send(err)
                     });
                 }
             });//end verify auth user function
         } else {
-            res.status(401);
-            res.send('Must be logged in');
+            res.status(401).send('Must be logged in');
         }
     }
 }
