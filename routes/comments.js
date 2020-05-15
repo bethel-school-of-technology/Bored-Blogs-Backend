@@ -41,4 +41,24 @@ router.get('/comments/read:postId', function (req, res) {
         }
     ).catch(e => defaultErr(e, res))
 })
+
+// DELETE A COMMENT BY ID (admin only)  // written by Jackie
+router.post("/comments/delete/:id", function (req, res, next) {
+    let commentID = parseInt(req.params.id);
+    let token = req.cookies.jwt;
+    if (token) {
+        authService.verifyUser(token)
+            .then(user => {
+                if (user.Admin) {
+                    Comments.findOne({
+                        where: {id: req.params.commentId}
+                    })
+                    models.comments.update({ Deleted: true }, { where: { commentId: commentID } })
+                } else {
+                    res.send("You are not Admin. Unable to delete comment.");
+                }
+            });
+    }
+});
+
 module.exports = router;

@@ -14,12 +14,18 @@ module.exports = {
             type: 'TIMESTAMP',
             defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
             allowNull: false
+        },
+        //deletedAt added by Jackie
+        deletedAt: { 
+            type: 'TIMESTAMP',
+            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+            allowNull: false
         }
     },
     options: {
         // don't forget to enable timestamps!
         timestamps: true,
         //parnoid means it won't delete but just say it deleted
-        paranoid: true,
+        paranoid: true
     }
 };
