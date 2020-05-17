@@ -1,5 +1,6 @@
 const Posts = require('../models').Posts;
 const Users = require('../models').Users;
+const { Sequelize } = require('sequelize');
 var express = require('express');
 var router = express.Router();
 const authService = require('../services/auth'); //<--- Add authentication service
@@ -16,6 +17,13 @@ router.route('/posts')
     .get(function (req, res) {
         //TOD0NE joined author on author id
         Posts.findAll({
+            where: {
+                
+                published: {
+                    //todo: find the current thing a ma bob
+                    //$gte: Sequelize.literal('CURRENT_TIMESTAMP')
+                }
+            },
             include: [
                 util.authorDataFilter
             ]
@@ -95,7 +103,7 @@ router.post("/posts/delete/:id", function (req, res, next) {
             .then(user => {
                 if (user.Admin) {
                     Posts.findOne({
-                        where: {id: req.params.postId}
+                        where: { id: req.params.postId }
                     })
                     models.posts
                         .update({ Deleted: true }, { where: { postId: postID } })
