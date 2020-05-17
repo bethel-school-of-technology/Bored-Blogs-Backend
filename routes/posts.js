@@ -17,7 +17,7 @@ router.route('/posts')
         //TOD0NE joined author on author id
         Posts.findAll({
             include: [
-                util.thingy_that_i_want_to_call_foo
+                util.authorDataFilter
             ]
         }).then(function (mPosts) {
             res.json(mPosts)
@@ -52,7 +52,7 @@ router.get('/posts/read:postId', function (req, res) {
                 id: req.params.postId
             },
             include: [
-                util.thingy_that_i_want_to_call_foo
+                util.authorDataFilter
             ]
         }
     ).then(function (mPosts) {

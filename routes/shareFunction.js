@@ -7,7 +7,7 @@ const Users = require('../models').Users;
 module.exports = {
     //to be used with sequel join
     //
-    thingy_that_i_want_to_call_foo: {
+    authorDataFilter: {
         model: Users,
         as: 'author',
         //we only want these field we shouldnt be giving away our hashed passwords

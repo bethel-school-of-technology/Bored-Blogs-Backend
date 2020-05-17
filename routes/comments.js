@@ -35,8 +35,8 @@ router.get('/comments/read:postId', function (req, res) {
         where: {
             parentPostId: req.params.postId
         },
-        inclide: [
-            util.thingy_that_i_want_to_call_foo
+        include: [
+            util.authorDataFilter
         ]
     }).then(
         c => {
@@ -46,6 +46,41 @@ router.get('/comments/read:postId', function (req, res) {
     ).catch(e => defaultErr(e, res))
 })
 
+router.route('/comments/update:commentId')
+    .post(function (req, res) {
+        util.authenticateUser(req, res, user => {
+            var form = req.body;
+            Comments.findOne({
+                where: {
+                    id: req.params.commentId
+                }
+            }).then(comment=>{
+                
+            })
+            Comments.create({
+                body: form.body,
+                parentPostId: req.params.postId,
+                CommentId: form.CommentId,
+                authorId: user.id
+            }).then(theNewComment => {
+                res.json(theNewComment);
+            }).catch(e => defaultErr(e, res))
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+/*
+jacob i dont mean to be rude but u could do this
+util.authenticateAdmin(req, res, admin => { Comments.destory({ where: { commentId: +req.params.id } }) })
+*/
 // DELETE A COMMENT BY ID (admin only)  // written by Jackie
 router.post("/comments/delete/:id", function (req, res, next) {
     let commentID = parseInt(req.params.id);
@@ -55,7 +90,7 @@ router.post("/comments/delete/:id", function (req, res, next) {
             .then(user => {
                 if (user.Admin) {
                     Comments.findOne({
-                        where: {id: req.params.commentId}
+                        where: { id: req.params.commentId }
                     })
                     models.comments.update({ Deleted: true }, { where: { commentId: commentID } })
                 } else {
