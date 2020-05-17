@@ -11,9 +11,6 @@ const defaultErr = (err, res) => {
     res.send(err.toString());
 };
 
-
-
-
 router.route('/comments/create:postId')
     .post(function (req, res) {
         util.authenticateUser(req, res, user => {
@@ -29,13 +26,15 @@ router.route('/comments/create:postId')
             }).catch(e => defaultErr(e, res))
         });
     });
+
+    // is this for "Read all the comments" on a post? (Jackie)
 router.get('/comments/read:postId', function (req, res) {
     console.log(req.params.postId);
     Comments.findAll({
         where: {
             parentPostId: req.params.postId
         },
-        inclide: [
+        inclide: [                                      // should this be "include"?
             util.thingy_that_i_want_to_call_foo
         ]
     }).then(
@@ -47,6 +46,8 @@ router.get('/comments/read:postId', function (req, res) {
 })
 
 // DELETE A COMMENT BY ID (admin only)  // written by Jackie
+
+// should comments be deleted by "CommentId"? (per the code in 'comments/create' above)
 router.post("/comments/delete/:id", function (req, res, next) {
     let commentID = parseInt(req.params.id);
     let token = req.cookies.jwt;

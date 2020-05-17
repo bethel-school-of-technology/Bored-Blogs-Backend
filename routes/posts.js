@@ -36,7 +36,9 @@ router.route('/posts')
             Posts.create({
                 title: form.title,
                 body: form.body,
-                authorId: admin.id
+                authorId: admin.id          
+                //Jackie: do we also need createdAt date?  And are we using "preview" for anything?
+                // createdAt: createdAt
             }).then(theNewPost => {
                 res.json(theNewPost);
             }).catch(e => defaultErr(e, res))
