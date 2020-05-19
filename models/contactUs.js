@@ -2,42 +2,24 @@
 const shared = require('../shared');
 const authService = require('../services/auth'); //<--- Add authentication service
 module.exports = (sequelize, DataTypes) => {
-  const Accounts = sequelize.define('Accounts', {
+  const ContactUs = sequelize.define('Accounts', {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      set(val) {
-        this.setDataValue('password', authService.hashPassword(val));
-      }
-    },
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    bio: DataTypes.STRING,
-    isAdmin: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-    lastLoggedIn: {
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false
-  },
-    style: {
-      type: DataTypes.STRING,
-    },
+    id: DataTypes.NUMBER,
+    subject: DataTypes.STRING,
+    body: DataTypes.STRING,
     ...shared.fields
   }, {
     ...shared.options
   }
   );
-  Users.associate = function (models) {
+  ContactUs.associate = function (models) {
     // associations can be defined here
   };
-  return Users;
+  return ContactUs;
 };
