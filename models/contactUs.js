@@ -2,7 +2,7 @@
 const shared = require('../shared');
 const authService = require('../services/auth'); //<--- Add authentication service
 module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define('Users', {
+  const Accounts = sequelize.define('Accounts', {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
