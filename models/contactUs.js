@@ -1,6 +1,6 @@
 'use strict';
 const shared = require('../shared');
-const authService = require('../services/auth'); //<--- Add authentication service
+
 module.exports = (sequelize, DataTypes) => {
   const ContactUs = sequelize.define('Accounts', {
     email: {
