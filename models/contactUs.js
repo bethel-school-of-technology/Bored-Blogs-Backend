@@ -2,7 +2,7 @@
 const shared = require('../shared');
 
 module.exports = (sequelize, DataTypes) => {
-  const ContactUs = sequelize.define('Accounts', {
+  const ContactUs = sequelize.define('contactUs', {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    id: DataTypes.NUMBER,
     subject: DataTypes.STRING,
     body: DataTypes.STRING,
     ...shared.fields

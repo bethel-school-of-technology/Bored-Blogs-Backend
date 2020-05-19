@@ -17,13 +17,13 @@ router.route('/posts')
     .get(function (req, res) {
         //TOD0NE joined author on author id
         Posts.findAll({
-            where: {
-                
-                published: {
-                    //todo: find the current thing a ma bob
-                    //$gte: Sequelize.literal('CURRENT_TIMESTAMP')
-                }
-            },
+            //where: {
+
+                //published: {
+                //todo: find the current thing a ma bob
+                //$gte: Sequelize.literal('CURRENT_TIMESTAMP')
+                //}
+            //},
             include: [
                 util.authorDataFilter
             ]
@@ -44,7 +44,7 @@ router.route('/posts')
             Posts.create({
                 title: form.title,
                 body: form.body,
-                authorId: admin.id          
+                authorId: admin.id
                 //Jackie: do we also need createdAt date?  And are we using "preview" for anything?
                 // createdAt: createdAt
             }).then(theNewPost => {
