@@ -1,6 +1,7 @@
 'use strict';
 const shared = require('../shared');
 const authService = require('../services/auth'); //<--- Add authentication service
+
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
     email: {
@@ -28,11 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       allowNull: false
     },
-    createdAt: {
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false
-    },
+    // createdAt: {
+    //   type: 'TIMESTAMP',
+    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+    //   allowNull: false
+    // },
     style: {
       type: DataTypes.STRING,
     },

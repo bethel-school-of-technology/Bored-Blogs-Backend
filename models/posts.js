@@ -5,6 +5,13 @@ module.exports = (sequelize, DataTypes) => {
   const Posts = sequelize.define('Posts', {
     title: DataTypes.STRING,
     body: DataTypes.STRING,
+    preview: DataTypes.STRING,
+    relatedGames: DataTypes.STRING,   //this is an array
+    tags: DataTypes.STRING,            //this is an array
+    //id: number;                     //inherent?
+    //author: string;                 //inherent?
+    //authorId:number;                //inherent?
+
     //TODO: status
     //status
     published: {
@@ -13,10 +20,14 @@ module.exports = (sequelize, DataTypes) => {
       //defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       //allowNull: false
     },
+
+   
+
     ...shared.fields
   }, {
     ...shared.options
   });
+
   Posts.associate = function (models) {
     // associations can be defined here
 
