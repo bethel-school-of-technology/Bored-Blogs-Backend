@@ -4,13 +4,11 @@ const shared = require('../shared');
 module.exports = (sequelize, DataTypes) => {
   const Comments = sequelize.define('Comments', {
     body: DataTypes.STRING,
-    posted: {
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false
-    },
+
+
     ...shared.fields
-  }, {
+  }, 
+  {
     ...shared.options
   }
   );

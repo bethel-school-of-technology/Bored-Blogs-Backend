@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     subject: DataTypes.STRING,
     body: DataTypes.STRING,
+    
     ...shared.fields
   }, {
     ...shared.options

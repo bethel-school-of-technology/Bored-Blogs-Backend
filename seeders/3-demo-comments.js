@@ -9,17 +9,53 @@ module.exports = {
     */
     return queryInterface.bulkInsert('Comments', [
       {
-        body: 'comment 1',
+        body: 'comment test 1',
         parentPostId: 1,
         authorId: 1
       },
       {
-        body: 'my body2',
+        body: 'comment body2',
         parentPostId: 1,
         CommentId: 1,
         authorId: 1
-      }
-    ], {
+      },
+    //     id: 25,
+    //     user: "Peppy Longstocking",
+    //     body: "test comment 123 hardcoded in post-comment service",
+    //     createdAt: "05/19/2020",
+    //     parentPostId: 1,
+    //     CommentId: 1,
+    //     authorId: 7
+    // },
+    // {
+    //     id: 26,
+    //     user: "Bob Jones",
+    //     body: "comment 2 hardcoded in post-comment service",
+    //     createdAt: "03/02/2020",
+    //     parentPostId: 2,
+    //     CommentId: 1,
+    //     authorId: 1
+    //   },
+    //   {
+    //     id: 26,
+    //     user: "Bob Jones",
+    //     body: "comment 3 hardcoded in post-comment service",
+    //     createdAt: "01/28/2020",
+    //     parentPostId: 3,
+    //     CommentId: 3,
+    //     authorId: 1
+    //     },
+    //     {
+    //       id: 26,
+    //       user: "Bob Jones",
+    //       body: "comment 4 hardcoded in post-comment service",
+    //       createdAt: "05/10/2020",
+    //       parentPostId: 4,
+    //       CommentId: 2,
+    //       authorId: 1
+    //       }
+    ], 
+    {
 
     });
   },
