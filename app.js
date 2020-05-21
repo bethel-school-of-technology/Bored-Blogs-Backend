@@ -51,9 +51,9 @@ app.use(function (err, req, res, next) {
 //https://stackoverflow.com/questions/21105748/sequelize-js-how-to-use-migrations-and-sync
 
 //when we change models we have to manual adjust the db
-var flip = !true;
+var flip = false;
 
-if (!false) models.sequelize.sync({ alter: !flip, force: flip }).then(function () {
+if (true) models.sequelize.sync({ alter: !flip, force: flip }).then(function () {
   console.log("DB Sync'd up")
 });
 
