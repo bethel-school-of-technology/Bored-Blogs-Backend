@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    bio: DataTypes.STRING,
+    bio: {//down here is the options for the collum
+      type: DataTypes.TEXT
+
+    },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

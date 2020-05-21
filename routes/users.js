@@ -75,7 +75,7 @@ router.post('/verify', function (req, res) {
 router.get('/users/contributors', function (req, res, next) {
   Users.findAll({
     where: {
-      isAdmin: true
+      isAdmin: 1
     },
     attributes: [
       'firstName',

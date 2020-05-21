@@ -4,13 +4,11 @@ const shared = require('../shared');
 module.exports = (sequelize, DataTypes) => {
   const Posts = sequelize.define('Posts', {
     title: DataTypes.STRING,
-    body: DataTypes.STRING,
+    body: DataTypes.TEXT,
     preview: DataTypes.STRING,
+
     relatedGames: DataTypes.STRING,   //this is an array
-    tags: DataTypes.STRING,            //this is an array
-    //id: number;                     //inherent?
-    //author: string;                 //inherent?
-    //authorId:number;                //inherent?
+    tags: DataTypes.STRING,            //this is an array of characters yes strings no
 
     //TODO: status
     //status
@@ -20,9 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       //defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       //allowNull: false
     },
-
-   
-
     ...shared.fields
   }, {
     ...shared.options
@@ -34,5 +29,6 @@ module.exports = (sequelize, DataTypes) => {
     //the author goes down here
     Posts.belongsTo(models.Users, { as: 'author' })
   };
+  
   return Posts;
 };

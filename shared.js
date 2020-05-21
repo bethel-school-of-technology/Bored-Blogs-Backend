@@ -21,5 +21,6 @@ module.exports = {
         timestamps: true,
         //parnoid means it won't delete but just say it deleted
         paranoid: true,
+        timezone:"-05:00"
     }
 };
