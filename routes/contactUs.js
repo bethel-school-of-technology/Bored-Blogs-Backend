@@ -1,3 +1,4 @@
+const ContactUs = require('../models').ContactUs;
 const { Sequelize } = require('sequelize');
 var express = require('express');
 var router = express.Router();
@@ -12,39 +13,32 @@ const defaultErr = (err, res) => {
 };
 
 //Get all contact submissions
-router.get('/', function(res, next){
-    let token = req.cookies.jwt;
-    if (token) {
-        models.contactSubmissions
-        .findAll({
-            where: { PostId: PostId, Deleted: false }
-        })
-        .then(result => res.prependListener("contactSubmissions", {contactSubmissions: result }));
-    } else {
-        res.status(401);
-        res.send("MustBeLoggedIn");
-    }
+router.get('/', function (res, next) {
+    util.authenticateAdmin(req, res, (admin) => {
+        ContactUs.findAll({})
+            .then(contactSubmissions => {
+                res.json(contactSubmissions);
+            }).catch(e => defaultErr(e, res))
+    })
 });
 
 // delete a contact submission
-router.delete("/:id", function(req, res, next) {
+router.delete("/:id", function (req, res, next) {
     let submissionId = parseInt(req.params.id);
     models.contactSubmissions
-    .update(
-        { Deleted: true },
-        {
-            where: {id: submissionId }
-        }
-    ) .then(result => res.redirect("/"));
+        .update(
+            { Deleted: true },
+            {
+                where: { id: submissionId }
+            }
+        ).then(result => res.redirect("/"));
 })
 
-//createa a contact submission
-router.put("/create/:id", function(req, res, next) {
-    let submissionId = parseInt(req.params.id);
-    models.contactSubmissions
-    .update(req.body, {where: {id: submissionId }})
-    .then(result => res.redirect("/"));
+//updates a contact submission
+router.post("/", function (req, res, next) {
+    models.contactSubmissions.create(req.body)
+        .then(result => res.json(result));
 });
 
-//very important
+//very import
 module.exports = router;

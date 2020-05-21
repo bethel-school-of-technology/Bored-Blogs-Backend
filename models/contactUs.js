@@ -2,17 +2,9 @@
 const shared = require('../shared');
 
 module.exports = (sequelize, DataTypes) => {
-  const ContactUs = sequelize.define('contactUs', {
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+  const ContactUs = sequelize.define('contactUs', {    
     subject: DataTypes.STRING,
-    body: DataTypes.STRING,
-    
+    body: DataTypes.STRING,    
     ...shared.fields
   }, {
     ...shared.options
@@ -20,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   ContactUs.associate = function (models) {
     // associations can be defined here
+    ContactUs.belongsTo(models.Users, { as: 'author' });
   };
   return ContactUs;
 };
