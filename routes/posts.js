@@ -71,7 +71,7 @@ router.get('/posts/read:postId', function (req, res) {
 })
 
 router.post('/posts/update:postId', function (req, res) {
-    util.authenticateAdmin(req, res, (req, res, admin) => {
+    util.authenticateAdmin(req, res, (admin) => {
         Posts.findOne({
             where: {
                 id: req.params.postId

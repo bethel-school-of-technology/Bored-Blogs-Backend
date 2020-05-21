@@ -45,3 +45,6 @@ router.put("/create/:id", function(req, res, next) {
     .update(req.body, {where: {id: submissionId }})
     .then(result => res.redirect("/"));
 });
+
+//very important
+module.exports = router;

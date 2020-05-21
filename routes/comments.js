@@ -11,7 +11,7 @@ const defaultErr = (err, res) => {
     res.send(err.toString());
 };
 
-router.route('/comments/create:postId')
+router.route('/comments/create/:postId')
     .post(function (req, res) {
         util.authenticateUser(req, res, user => {
             var form = req.body;
@@ -28,7 +28,7 @@ router.route('/comments/create:postId')
     });
 
     // is this for "Read all the comments" on a post? (Jackie)
-router.get('/comments/read:postId', function (req, res) {
+router.get('/comments/read/:postId', function (req, res) {
     console.log(req.params.postId);
     Comments.findAll({
         where: {
@@ -45,7 +45,7 @@ router.get('/comments/read:postId', function (req, res) {
     ).catch(e => defaultErr(e, res))
 })
 
-router.route('/comments/update:commentId')
+router.route('/comments/update/:commentId')
     .post(function (req, res) {
         util.authenticateUser(req, res, user => {
             var form = req.body;
