@@ -28,6 +28,7 @@ app.use(session({ secret: 'perilous journey' }));
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/posts'));
 app.use('/', require('./routes/comments'));
+app.use('/contactSubmissions', require('./routes/contactUs'));
 
 
 
@@ -51,7 +52,7 @@ app.use(function (err, req, res, next) {
 //https://stackoverflow.com/questions/21105748/sequelize-js-how-to-use-migrations-and-sync
 
 //when we change models we have to manual adjust the db
-var flip = false;
+var flip = !false;
 
 if (!false) models.sequelize.sync({ alter: !flip, force: flip }).then(function () {
   console.log("DB Sync'd up")
