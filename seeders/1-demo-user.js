@@ -14,7 +14,7 @@ module.exports = {
         password: authService.hashPassword("password"),
         firstName: "Jacob",
         lastName: "Stanton",
-        bio: "i like programming",
+        bio: "I like programming",
         isAdmin: '1'
         //lastLoggedIn: new Date("05/12/20").toString(),
       },
@@ -67,6 +67,26 @@ module.exports = {
         //lastLoggedIn: "05/18/20",
         //createdAt: "04/01/19",
       },
+      {
+        email: "kam@email.com",
+        password: authService.hashPassword("123456"),
+        firstName: "Kamyla",
+        lastName: "Andrlik",
+        bio: "My heart is in Hawaii but my stomach is in Kentucky!",
+        isAdmin: '1'
+        //lastLoggedIn: "05/18/20",
+        //createdAt: "04/01/19",
+      },
+      {
+        email: "jackieroberts@email.com",
+        password: authService.hashPassword("asdzxc"),
+        firstName: "Jackie",
+        lastName: "Roberts",
+        bio: "I love Canada!",
+        isAdmin: '1'
+        //lastLoggedIn: "05/18/20",
+        //createdAt: "04/01/19",
+      }
     ],
 
     );

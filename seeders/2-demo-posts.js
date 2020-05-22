@@ -18,7 +18,7 @@ module.exports = {
         //tags: [],
       },
       {
-        authorId: 2,
+        authorId: 6,
         title: "Ticket to Ride",
         //published: "03/28/2020",
         //preview:          "PREVIEW. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
@@ -27,7 +27,7 @@ module.exports = {
         //tags: [],
       },
       {
-        authorId: 3,
+        authorId: 7,
         title: "Dixit",
         //published: "01/19/2020",
         //preview:          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
@@ -36,7 +36,7 @@ module.exports = {
         //tags: [],
       },
       {
-        authorId: 1,
+        authorId: 8,
         title: "Jungle Speed",
         //published: "05/01/2020",
         //preview:          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
@@ -54,7 +54,7 @@ module.exports = {
         //tags: [],
       },
       {
-        authorId: 1,
+        authorId: 6,
         title: "Werewolf",
         //published: "02/11/2020",
         //preview:          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
