@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Game.associate = function (models) {
     // associations can be defined here
-    Comments.belongsTo(models.Bio);
+    Game.belongsTo(models.Bio);
   };
   return Game;
 };
