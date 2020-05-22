@@ -2,6 +2,7 @@
 const shared = require('../shared');
 const authService = require('../services/auth'); //<--- Add authentication service
 
+
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
     email: {
@@ -17,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,    
+    lastName: DataTypes.STRING,
     isAdmin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
