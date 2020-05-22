@@ -1,4 +1,4 @@
-const ContactUs = require('../models').ContactUs;
+const ContactUs = require('../models').contactUs;
 const { Sequelize } = require('sequelize');
 var express = require('express');
 var router = express.Router();
@@ -13,7 +13,7 @@ const defaultErr = (err, res) => {
 };
 
 //Get all contact submissions
-router.get('/', function (res, next) {
+router.get('/', function (req, res, next) {
     util.authenticateAdmin(req, res, (admin) => {
         ContactUs.findAll({})
             .then(contactSubmissions => {

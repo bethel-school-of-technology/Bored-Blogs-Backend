@@ -32,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       allowNull: false
     },
+    url:{
+      type:DataTypes.STRING
+    },
     // createdAt: {
     //   type: 'TIMESTAMP',
     //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),

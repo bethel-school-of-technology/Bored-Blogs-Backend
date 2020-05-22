@@ -26,8 +26,26 @@ module.exports = {
         authorId: 2
       },
       {
-        body: 'comment body2 for post 2',
+        body: 'comment test for post 2',
         parentPostId: 2,
+        CommentId: 1,
+        authorId: 4
+      },
+      {
+        body: 'comment test for post 4',
+        parentPostId: 4,
+        CommentId: 1,
+        authorId: 3
+      },
+      {
+        body: 'comment test for post 4',
+        parentPostId: 4,
+        CommentId: null,
+        authorId: 3
+      },
+      {
+        body: 'comment test for post 5',
+        parentPostId: 5,
         CommentId: 1,
         authorId: 2
       },
