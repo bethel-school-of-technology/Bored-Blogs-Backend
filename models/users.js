@@ -17,11 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    bio: {//down here is the options for the collum
-      type: DataTypes.TEXT
-
-    },
+    lastName: DataTypes.STRING,    
     isAdmin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
@@ -34,14 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     url:{
       type:DataTypes.STRING
-    },
-    // createdAt: {
-    //   type: 'TIMESTAMP',
-    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-    //   allowNull: false
-    // },
-    style: {
-      type: DataTypes.STRING,
     },
     ...shared.fields
   }, {

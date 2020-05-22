@@ -78,10 +78,12 @@ router.get('/users/contributors', function (req, res, next) {
       isAdmin: 1
     },
     attributes: [
+      'id',
       'firstName',
       'lastName',
       'bio',
       'style',
+      'url'
     ]
   }).then(
     contribs => {
