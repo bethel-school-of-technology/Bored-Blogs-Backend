@@ -57,6 +57,16 @@ module.exports = {
         //lastLoggedIn: "05/18/20",
         //createdAt: "04/01/19",
       },
+      {
+        email: "kayla@email.com",
+        password: authService.hashPassword("123456"),
+        firstName: "Kayla",
+        lastName: "Miller",
+        bio: "I love pandas and programming!",
+        isAdmin: '1'
+        //lastLoggedIn: "05/18/20",
+        //createdAt: "04/01/19",
+      },
     ],
 
     );
