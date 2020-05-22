@@ -4,11 +4,14 @@ const authService = require('../services/auth'); //<--- Add authentication servi
 
 module.exports = (sequelize, DataTypes) => {
   const Bio = sequelize.define('Bio', {
-  favoriteGames: {
-    //?Can't figure out how to insert an array
-  },
+    //? KAYLA: @Jacob how to make Array a type? perhaps use square brackets and define another model?
+/*  favoriteGames: {
+   type: DataTypes.ARRAY(DataTypes.STRING),
+   allowNull: true,
+
+}, */
   birthday: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER(),
     allowNull: false,
   },
   other: {

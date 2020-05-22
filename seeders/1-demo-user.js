@@ -9,7 +9,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     /*
       Add altering commands here.
-      Return a promise to correctly handle asynchronicity.     
+      Return a promise to correctly handle asynchronicity.
 
     */
     return queryInterface.bulkInsert('Users', [
@@ -20,7 +20,7 @@ module.exports = {
         lastName: "Stanton",
         bio: "I like programming",
         isAdmin: '1',
-        style: styleFromColor("#006eff", "white"),
+        //style: styleFromColor("#006eff", "white"),
         url: 'https://ca.slack-edge.com/T9P33872P-UMB26EV6E-f1b15a101868-512'
         //lastLoggedIn: new Date("05/12/20").toString(),
       },
@@ -70,7 +70,7 @@ module.exports = {
         lastName: "Miller",
         bio: "I love pandas and programming!",
         isAdmin: '1',
-        style: styleFromColor("red", "white"),
+        //style: styleFromColor("red", "white"),
         url: 'https://ca.slack-edge.com/T9P33872P-UKW98R0NL-9b2d325d0d90-512',
         //lastLoggedIn: "05/18/20",
         //createdAt: "04/01/19",
@@ -82,7 +82,7 @@ module.exports = {
         lastName: "Andrlik",
         bio: "My heart is in Hawaii but my stomach is in Kentucky!",
         isAdmin: '1',
-        style: styleFromColor("#30c230", "white"),
+        //style: styleFromColor("#30c230", "white"),
         url: 'https://ca.slack-edge.com/T9P33872P-UNCD1UH6K-6e8e43a4b2fd-512',
         //lastLoggedIn: "05/18/20",
         //createdAt: "04/01/19",
@@ -94,7 +94,7 @@ module.exports = {
         lastName: "Roberts",
         bio: "I love Canada!",
         isAdmin: '1',
-        style: styleFromColor("yellow", "black"),
+        //style: styleFromColor("yellow", "black"),
         url: 'https://ca.slack-edge.com/T9P33872P-UMXPMHEAE-3b5c27f1c336-512'
         //lastLoggedIn: "05/18/20",
         //createdAt: "04/01/19",
