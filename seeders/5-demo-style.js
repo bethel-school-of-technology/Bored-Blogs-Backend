@@ -7,7 +7,7 @@ module.exports = {
       Return a promise to correctly handle asynchronicity.     
 
     */
-    return queryInterface.bulkInsert('ContactUs', [
+    return queryInterface.bulkInsert('Style', [
       {
         subject: 'saerdhkjbcvjkahsebcjhkgasebcjkaghwebc',
         body: 'comment test 1 for post 1',
@@ -43,7 +43,7 @@ module.exports = {
       return queryInterface.bulkDelete('People', null, {});
     */
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('ContactUs', null, {});
+      return queryInterface.bulkDelete('Style', null, {});
     }
   }
 };
