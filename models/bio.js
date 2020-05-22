@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Bio.associate = function (models) {
     // associations can be defined here
-    Comments.belongsTo(models.Users);
+    Bio.belongsTo(models.Users);
   };
   return Bio;
 };
