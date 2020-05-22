@@ -9,14 +9,14 @@ module.exports = {
     */
     return queryInterface.bulkInsert('ContactUs', [
       {
-        subject:'subject',
+        subject:'saerdhkjbcvjkahsebcjhkgasebcjkaghwebc',
         body: 'comment test 1 for post 1',
-        authorId: 1
+        authorId: 2
       },
       {
         subject: 'subject',
         body: 'comment body2 for post 1',
-        authorId: 2
+        authorId: 1
       },
     ],
       {
