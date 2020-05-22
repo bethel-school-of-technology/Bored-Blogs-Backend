@@ -30,27 +30,34 @@ module.exports = {
         let token = req.headers.auth;
         if (token != null) {
             //when token expires bad things happen
-            authService.verifyUser(token, (err, decoded) => {
-                if (err) {
-                    console.log(err)
-                    res.send(err);
-                } else {
-                    //console.log(decoded)
-                    Users.findOne({
-                        where: {
-                            id: decoded.UserId
-                        }
-                    }).then(
-                        user => {
-                            return lambda(user);
-                        }
-                    ).catch(function (err) {
-                        // handle error;
+            try {
+                authService.verifyUser(token, (err, decoded) => {
+                    if (err) {
+                        console.log('shareFunction line 35');
                         console.log(err)
-                        res.status(500).send(err)
-                    });
-                }
-            });//end verify auth user function
+                        res.status(400).send(err);
+                    } else {
+                        //console.log(decoded)
+                        Users.findOne({
+                            where: {
+                                id: decoded.UserId
+                            }
+                        }).then(
+                            user => {
+                                return lambda(user);
+                            }
+                        ).catch(function (err) {
+                            // handle error;
+                            console.log('shareFunction line 50');
+                            console.log(err)
+                            res.status(500).send(err)
+                        });
+                    }
+                });//end verify auth user function
+            } catch (err) {
+                console.log(err)
+                res.status(400).send(err)
+            }
         } else {
             res.status(401).send('Must be logged in');
         }

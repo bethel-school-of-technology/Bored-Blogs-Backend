@@ -22,12 +22,21 @@ router.route('/comments/create/:postId')
                 CommentId: form.CommentId,
                 authorId: user.id
             }).then(theNewComment => {
-                res.json(theNewComment);
+                Comments.findAll({
+                    where: {
+                        parentPostId: req.params.postId
+                    },
+                    include: [
+                        util.authorDataFilter
+                    ]
+                }).then(allComments => {
+                    res.json(allComments);
+                });
             }).catch(e => defaultErr(e, res))
         });
     });
 
-    // is this for "Read all the comments" on a post? (Jackie)
+// is this for "Read all the comments" on a post? (Jackie)
 router.get('/comments/read/:postId', function (req, res) {
     console.log(req.params.postId);
     Comments.findAll({
@@ -53,8 +62,8 @@ router.route('/comments/update/:commentId')
                 where: {
                     id: req.params.commentId
                 }
-            }).then(comment=>{
-                
+            }).then(comment => {
+
             })
             Comments.create({
                 body: form.body,
