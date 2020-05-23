@@ -4,8 +4,11 @@ const authService = require('../services/auth'); //<--- Add authentication servi
 
 module.exports = (sequelize, DataTypes) => {
   const Style = sequelize.define('Style', {
-    "background-color":{
-      type:DataTypes.STRING
+    "background-color": {
+      type: DataTypes.STRING
+    },
+    "color": {
+      type: DataTypes.STRING
     },
     ...shared.fields
   }, {
