@@ -14,8 +14,6 @@ module.exports = {
         attributes: [
             'firstName',
             'lastName',
-            'bio',
-            'style',
         ]
     },
     //lambda is jacobism

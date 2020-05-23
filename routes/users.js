@@ -81,8 +81,6 @@ router.get('/users/contributors', function (req, res, next) {
       'id',
       'firstName',
       'lastName',
-      'bio',
-      'style',
       'url'
     ]
   }).then(
