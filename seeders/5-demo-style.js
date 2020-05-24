@@ -9,9 +9,24 @@ module.exports = {
     */
     return queryInterface.bulkInsert('Styles', [
       {
-        "background-color": "red",
-        "color": "black",
+        "background-color": "#006eff",
+        "color": "white",
         userId: 1,
+      },
+      {
+        "background-color": "yellow",
+        "color": "black",
+        userId: 8,
+      },
+      {
+        "background-color": "#30C230",
+        "color": "white",
+        userId: 7,
+      },
+      {
+        "background-color": "red",
+        "color": "white",
+        userId: 6,
       },
     ],
       {

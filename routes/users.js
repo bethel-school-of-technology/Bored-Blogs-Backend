@@ -1,4 +1,5 @@
-var Users = require('../models').Users;
+const Models = require('../models');
+const Users = require('../models').Users;
 var express = require('express');
 var router = express.Router();
 const authService = require('../services/auth'); //<--- Add authentication service
@@ -72,6 +73,43 @@ router.post('/verify', function (req, res) {
   });
 });
 
+router.get('/users/contributors/:id', function (req, res, next) {
+  Users.findOne({
+    where: {
+      id: req.params.id,
+      isAdmin: 1,
+    },
+    attributes: [
+      'id',
+      'firstName',
+      'lastName',
+      'url'
+    ],
+    include: [
+      {
+        model: Models.Style,
+        attributes: [
+          'background-color',
+          'color',
+        ],
+      },
+      {
+        model: Models.Bio,
+      },
+    ]
+  }).then(
+    contrib => {
+      contrib = contrib.dataValues;
+      contrib['bio'] = contrib['Bio']
+      delete contrib.Bio;
+      contrib['style'] = contrib['Style']
+      delete contrib.Style;
+      res.json(contrib);
+    }
+  ).catch(e => defaultErr(e, res))
+
+});
+
 router.get('/users/contributors', function (req, res, next) {
   Users.findAll({
     where: {
@@ -82,9 +120,29 @@ router.get('/users/contributors', function (req, res, next) {
       'firstName',
       'lastName',
       'url'
+    ],
+    include: [
+      {
+        model: Models.Style,
+        attributes: [
+          'background-color',
+          'color',
+        ],
+      },
+      {
+        model: Models.Bio,
+      },
     ]
   }).then(
     contribs => {
+      contribs = contribs.map(foo => {
+        foo = foo.dataValues;
+        foo['bio'] = foo['Bio']
+        delete foo.Bio;
+        foo['style'] = foo['Style']
+        delete foo.Style;
+        return foo;
+      });
       res.json(contribs);
     }
   ).catch(e => defaultErr(e, res))
