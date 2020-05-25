@@ -30,16 +30,16 @@ function loginVibeCheck(req, res, next, lambda) {
 }
 
 // Admin only - view list of users
-// router.get('/', (req, res, next) => {
-router.get('/users/list', (req, res, next) => {
+router.get('/', (req, res, next) => {
+// router.get('/users/list', (req, res, next) => {
     loginVibeCheck(req, res, next, user => {
         //put code here                    
         models.users.findAll({
         }).then(
             e => {
                 if (user.Admin) {
-                    // res.render('adminUserList', { user: e })
-                    res.render('users-list', { user: e })
+                    res.render('adminUserList', { user: e })
+                    // res.render('users-list', { user: e })
                 } else {
                     res.status(403);
                     res.send('Unauthorized to view users-list page');
