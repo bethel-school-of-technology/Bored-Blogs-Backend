@@ -29,24 +29,27 @@ function loginVibeCheck(req, res, next, lambda) {
     }
 }
 
-
-router.get('/', (req, res, next) => {
+// Admin only - view list of users
+// router.get('/', (req, res, next) => {
+router.get('/users/list', (req, res, next) => {
     loginVibeCheck(req, res, next, user => {
         //put code here                    
         models.users.findAll({
         }).then(
             e => {
                 if (user.Admin) {
-                    res.render('adminUserList', { user: e })
+                    // res.render('adminUserList', { user: e })
+                    res.render('users-list', { user: e })
                 } else {
                     res.status(403);
-                    res.send('Unauthorized to view this page');
+                    res.send('Unauthorized to view users-list page');
                 }
             }
         )
     })
 });
-
+  
+// DO WE NEED THIS? We should only delete users, not edit them (Jacke)
 router.get('/editUser/:id', (req, res, next) => {
     loginVibeCheck(req, res, next, user => {
         if (user.Admin) {
