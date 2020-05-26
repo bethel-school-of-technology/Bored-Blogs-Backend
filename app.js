@@ -25,6 +25,7 @@ app.use(session({ secret: 'perilous journey' }));
 
 
 //!registering all the endpoints here!
+app.use('/', require('./routes/admin'));
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/posts'));
 app.use('/', require('./routes/comments'));
