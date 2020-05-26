@@ -50,6 +50,15 @@ module.exports = {
         //createdAt: "04/01/19",
       },
       {
+        email: "sueellen@email.com",
+        password: authService.hashPassword("123456"),
+        firstName: "Sue",
+        lastName: "Ellen",
+        isAdmin: '0'
+        //lastLoggedIn: "05/18/20",
+        //createdAt: "04/01/19",
+      },
+      {
         email: "kayla@email.com",
         password: authService.hashPassword("123456"),
         firstName: "Kayla",
