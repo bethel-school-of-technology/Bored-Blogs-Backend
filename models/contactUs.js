@@ -2,7 +2,7 @@
 const shared = require('../shared');
 
 module.exports = (sequelize, DataTypes) => {
-  const ContactUs = sequelize.define('contactUs', {    
+  const ContactUs = sequelize.define('ContactUs', {    
     subject: DataTypes.STRING,
     body: DataTypes.STRING,    
     ...shared.fields

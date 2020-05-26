@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     lastLoggedIn: {
       type: 'TIMESTAMP',
+      //TODO: update authenticate user to save the model so time stamp is updated
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       allowNull: false
     },

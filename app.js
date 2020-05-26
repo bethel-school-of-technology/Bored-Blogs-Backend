@@ -29,7 +29,7 @@ app.use('/', require('./routes/admin'));
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/posts'));
 app.use('/', require('./routes/comments'));
-app.use('/contactSubmissions', require('./routes/contactUs'));
+app.use('/', require('./routes/contactUs'));
 
 
 

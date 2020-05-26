@@ -1,4 +1,5 @@
-const ContactUs = require('../models').contactUs;
+const ContactUs = require('../models').ContactUs;
+const Users = require('../models').Users;
 const { Sequelize } = require('sequelize');
 var express = require('express');
 var router = express.Router();
@@ -13,9 +14,16 @@ const defaultErr = (err, res) => {
 };
 
 //Get all contact submissions
-router.get('/', function (req, res, next) {
+router.get('/contactSubmissions', function (req, res, next) {
     util.authenticateAdmin(req, res, (admin) => {
-        ContactUs.findAll({})
+        ContactUs.findAll({
+            include: [
+                {
+                    model: Users,
+                    as: 'author',
+                }
+            ]
+        })
             .then(contactSubmissions => {
                 res.json(contactSubmissions);
             }).catch(e => defaultErr(e, res))
@@ -23,7 +31,7 @@ router.get('/', function (req, res, next) {
 });
 
 // delete a contact submission
-router.delete("/:id", function (req, res, next) {
+router.delete("/contactSubmissions/:id", function (req, res, next) {
     let submissionId = parseInt(req.params.id);
     models.contactSubmissions
         .update(
@@ -35,9 +43,18 @@ router.delete("/:id", function (req, res, next) {
 })
 
 //updates a contact submission
-router.post("/", function (req, res, next) {
-    models.contactSubmissions.create(req.body)
-        .then(result => res.json(result));
+router.post("/contactSubmissions", function (req, res, next) {
+    util.authenticateUser(req, res, (user) => {
+        var form = req.body;
+        console.log(form)
+        ContactUs.create({
+            subject: form.subject,
+            body: form.body,
+            authorId: user.id
+        })
+            .then(result => res.json(result))
+            .catch(e => defaultErr(e, res));
+    });
 });
 
 //very import
