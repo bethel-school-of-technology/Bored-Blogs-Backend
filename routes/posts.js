@@ -19,10 +19,10 @@ router.route('/posts')
         Posts.findAll({
             //where: {
 
-                //published: {
-                //todo: find the current thing a ma bob
-                //$gte: Sequelize.literal('CURRENT_TIMESTAMP')
-                //}
+            //published: {
+            //todo: find the current thing a ma bob
+            //$gte: Sequelize.literal('CURRENT_TIMESTAMP')
+            //}
             //},
             include: [
                 util.authorDataFilter
@@ -55,7 +55,7 @@ router.route('/posts')
 
 router.get('/posts/read:postId', function (req, res) {
     //TODO: join author on author id
-    console.log(req.params.postId)
+    //console.log(req.params.postId)
     Posts.findOne(
         {
             where: {
@@ -70,7 +70,8 @@ router.get('/posts/read:postId', function (req, res) {
     }).catch(e => defaultErr(e, res));
 })
 
-router.post('/posts/update:postId', function (req, res) {
+router.put('/posts/update/:postId', function (req, res) {
+    console.log(req.params.postId);
     util.authenticateAdmin(req, res, (admin) => {
         Posts.findOne({
             where: {
@@ -81,14 +82,18 @@ router.post('/posts/update:postId', function (req, res) {
             const updoot = (key) => {
                 //save some code
                 if (form[key] != null) {
+                    console.log(key);
+                    console.log(form[key]);
                     post[key] = form[key];
                 }
             }
-            //console.log(post)
+            console.log(post)
             updoot('title')
             updoot('body')
             updoot('authorId')
-            //console.log(post)
+            console.log('hello')
+            console.log(post)
+
             post.save().then(e => {
                 res.json(e);
             })
@@ -97,23 +102,20 @@ router.post('/posts/update:postId', function (req, res) {
 })
 
 // DELETE A POST BY ID (admin only) // written by Jackie
-router.post("/posts/delete/:id", function (req, res, next) {
+router.delete("/posts/delete/:id", function (req, res, next) {
     let postID = parseInt(req.params.id);
-    let token = req.cookies.jwt;
-    if (token) {
-        authService.verifyUser(token)
-            .then(user => {
-                if (user.Admin) {
-                    Posts.findOne({
-                        where: { id: req.params.postId }
-                    })
-                    models.posts
-                        .update({ Deleted: true }, { where: { postId: postID } })
-                } else {
-                    res.send("You are not Admin. Unable to delete post.");
-                }
-            });
-    }
+    authService.verifyUser(req.headers.auth)
+        .then(user => {
+            if (user.Admin) {
+                Posts.findOne({
+                    where: { id: req.params.id }
+                })
+                models.posts
+                    .update({ Deleted: true }, { where: { postId: postID } })
+            } else {
+                res.send("You are not Admin. Unable to delete post.");
+            }
+        });
 });
 
 module.exports = router;
