@@ -76,15 +76,6 @@ router.route('/comments/update/:commentId')
         });
     });
 
-
-
-
-
-
-
-
-
-
 /*
 jacob i dont mean to be rude but u could do this
 util.authenticateAdmin(req, res, admin => { Comments.destory({ where: { commentId: +req.params.id } }) })
@@ -92,8 +83,9 @@ util.authenticateAdmin(req, res, admin => { Comments.destory({ where: { commentI
 // DELETE A COMMENT BY ID (admin only)  // written by Jackie
 
 // should comments be deleted by "CommentId"? (per the code in 'comments/create' above)
-router.post("/comments/delete/:id", function (req, res, next) {
+router.delete("/comments/delete/:id", function (req, res, next) {
     let commentID = parseInt(req.params.id);
+    util.authenticateAdmin()
     let token = req.cookies.jwt;
     if (token) {
         authService.verifyUser(token)

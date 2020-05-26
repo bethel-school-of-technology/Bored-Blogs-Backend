@@ -104,18 +104,11 @@ router.put('/posts/update/:postId', function (req, res) {
 // DELETE A POST BY ID (admin only) // written by Jackie
 router.delete("/posts/delete/:id", function (req, res, next) {
     let postID = parseInt(req.params.id);
-    authService.verifyUser(req.headers.auth)
-        .then(user => {
-            if (user.Admin) {
-                Posts.findOne({
-                    where: { id: req.params.id }
-                })
-                models.posts
-                    .update({ Deleted: true }, { where: { postId: postID } })
-            } else {
-                res.send("You are not Admin. Unable to delete post.");
-            }
-        });
+    util.authenticateAdmin(req, res, (admin) => {
+        Posts.findOne({
+            where: { id: req.params.id }
+        }).then(post => {});
+    });   
 });
 
 module.exports = router;
