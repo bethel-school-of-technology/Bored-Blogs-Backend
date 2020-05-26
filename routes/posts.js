@@ -53,7 +53,7 @@ router.route('/posts')
         })
     });
 
-router.get('/posts/read:postId', function (req, res) {
+router.get('/posts/read/:postId', function (req, res) {
     //TODO: join author on author id
     //console.log(req.params.postId)
     Posts.findOne(
@@ -66,7 +66,7 @@ router.get('/posts/read:postId', function (req, res) {
             ]
         }
     ).then(function (mPosts) {
-        res.json(mPosts)
+        res.json(mPosts);
     }).catch(e => defaultErr(e, res));
 })
 
@@ -79,20 +79,21 @@ router.put('/posts/update/:postId', function (req, res) {
             }
         }).then(post => {
             var form = req.body;
+            //updoots the attribute of the object using the key
             const updoot = (key) => {
                 //save some code
                 if (form[key] != null) {
-                    console.log(key);
-                    console.log(form[key]);
+                    //console.log(key);
+                    //console.log(form[key]);
                     post[key] = form[key];
                 }
             }
-            console.log(post)
+            //console.log(post)
             updoot('title')
             updoot('body')
             updoot('authorId')
-            console.log('hello')
-            console.log(post)
+            //console.log('hello')
+            //console.log(post)
 
             post.save().then(e => {
                 res.json(e);
@@ -107,8 +108,8 @@ router.delete("/posts/delete/:id", function (req, res, next) {
     util.authenticateAdmin(req, res, (admin) => {
         Posts.findOne({
             where: { id: req.params.id }
-        }).then(post => {});
-    });   
+        }).then(post => { post.destroy().then(p=>res.json(p)) });
+    });
 });
 
 module.exports = router;

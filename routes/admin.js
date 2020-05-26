@@ -2,9 +2,17 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models'); //<--- Add models
 var authService = require('../services/auth'); //<--- Add authentication service
+const util = require('./shareFunction');
+
+
+const defaultErr = (err, res) => {
+    // handle error;
+    res.status(500);
+    res.send(err.toString());
+};
 
 function loginVibeCheck(req, res, next, lambda) {
-    let token = req.cookies.jwt;
+    let token = req.headers.auth;
     if (token) {
         //when token expires bad things happen
         var foo = authService.verifyUser(token);
@@ -32,25 +40,22 @@ function loginVibeCheck(req, res, next, lambda) {
 // Admin only - view list of users
 // router.get('/', (req, res, next) => {
 router.get('/users/list', (req, res, next) => {
-    loginVibeCheck(req, res, next, user => {
-        //put code here                    
+    util.authenticateAdmin(req, res, (admin) => {
         models.Users.findAll({
+            where: {
+                isAdmin: 0
+            }
         }).then(
             e => {
-                if (user.Admin) {
-                    // res.render('adminUserList', { user: e })
-                    res.json(e);
-                } else {
-                    res.status(403);
-                    res.send('Unauthorized to view users-list page');
-                }
+                // res.render('adminUserList', { user: e })
+                res.json(e);
             }
         )
-    })
+    });
 });
-  
+
 // DO WE NEED THIS? We should only delete users, not edit them (Jacke)
-router.get('/editUser/:id', (req, res, next) => {
+if (false) router.get('/editUser/:id', (req, res, next) => {
     loginVibeCheck(req, res, next, user => {
         if (user.Admin) {
             //todo check author
@@ -72,45 +77,19 @@ router.get('/editUser/:id', (req, res, next) => {
 });
 
 //deletes
-router.post("/deleteUser/:id", (req, res, next) => {
-    loginVibeCheck(req, res, next, user => {
-        if (user.Admin) {
-            models.users.update(
-                { deleted: 1 }, {
-                where: {
-                    userId: parseInt(req.params.id)
-                }
+router.delete("/deleteUser/:id", (req, res, next) => {
+    util.authenticateAdmin(req, res, (admin) => {
+        models.Users.findOne({
+            where: {
+                isAdmin: 0,
+                id: +req.params.id
             }
-            ).then((result) => {
-                console.log(result);
-                res.send("success");
-            })
-        }
-        else {
-            res.status(403);
-            res.send('Unauthorized to view this page');
-        }
-    })
+        }).then(
+            e => {
+                models.Users.findAll({}).then(users => res.send(users))
+            }
+        ).catch(e => defaultErr(e, res))
+    });
 });
 
-router.post("/deletePost/:id", (req, res, next) => {
-    loginVibeCheck(req, res, next, user => {
-        if (user.Admin) {
-            models.posts.update(
-                { deleted: 1 }, {
-                where: {
-                    PostId: parseInt(req.params.id)
-                }
-            }
-            ).then((result) => {
-                console.log(result);
-                res.send("success");
-            })
-        }
-        else {
-            res.status(403);
-            res.send('Unauthorized to view this page');
-        }
-    })
-});
 module.exports = router;
