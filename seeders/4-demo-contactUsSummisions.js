@@ -9,23 +9,23 @@ module.exports = {
     */
     return queryInterface.bulkInsert('ContactUs', [
       {
-        subject: 'saerdhkjbcvjkahsebcjhkgasebcjkaghwebc',
-        body: 'comment test 1 for post 1',
+        subject: 'Chess',
+        body: 'I would like to learn more about Chess strategies',
         authorId: 2
       },
       {
-        subject: 'subject',
-        body: 'comment body2 for post 1',
+        subject: 'Electronic Games',
+        body: 'Will you post something about the old atari games please?',
         authorId: 1
       },
       {
-        subject: 'Message Test 1',
-        body: 'message test 1 for post 1 - authorId=5',
+        subject: 'Group Games',
+        body: 'What are your suggestions on games for large groups of people.',
         authorId: 5
       },
       {
-        subject: 'Message Test 2',
-        body: 'message test 2 for post 2 - authorId=3',
+        subject: 'Scattagories',
+        body: 'Please blog about the scattagories game',
         authorId: 3
       },
     ],
