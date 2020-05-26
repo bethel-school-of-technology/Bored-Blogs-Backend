@@ -4,25 +4,19 @@ const authService = require('../services/auth'); //<--- Add authentication servi
 
 module.exports = (sequelize, DataTypes) => {
   const Bio = sequelize.define('Bio', {
-    //? KAYLA: @Jacob how to make Array a type? perhaps use square brackets and define another model?
-    //yeah we are going to have to make another model for array
-    /*  favoriteGames: {
-   type: DataTypes.ARRAY(DataTypes.STRING),
-   allowNull: true,
-
-}, */
+    //?HOW DO I ADD IN THE ARRAY FOR favoriteGames?
     body: {
       type: DataTypes.TEXT
     },
     birthday: {
-      type: 'TIMESTAMP',
+      type: DataTypes.TEXT
     },
     other: {
       type: DataTypes.TEXT,
       allowNull: !false,
     },
     otherWorks: {
-      type: DataTypes.STRING, //? Can STRING also mean a url? That's what this one needs to be
+      type: DataTypes.STRING, //?HOW DO I MAKE THIS AN ARRAY AS WELL?
       allowNull: !false,
     },
     //this is gonna hurt TODO: eventually
