@@ -15,10 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: !false,
     },
-    otherWorks: {
-      type: DataTypes.STRING, //?HOW DO I MAKE THIS AN ARRAY AS WELL?
-      allowNull: !false,
-    },
     //this is gonna hurt TODO: eventually
 
     ...shared.fields
@@ -28,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Bio.associate = function (models) {
     // associations can be defined here
+    //TODO connect Bio to OtherWork and FavoriteGame
     Bio.belongsTo(models.Users);
   };
   return Bio;

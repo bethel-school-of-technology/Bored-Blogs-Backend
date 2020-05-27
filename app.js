@@ -60,6 +60,7 @@ if (true) models.sequelize.sync({ alter: !flip, force: flip }).then(function () 
 });
 
 
+
 app.listen(port, () => {
   console.log("Server listening on port " + port);
 });

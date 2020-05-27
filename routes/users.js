@@ -22,7 +22,7 @@ router.route('/users/register')
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: (req.body.password) //<--- Password is hashed on model        
+        password: (req.body.password) //<--- Password is hashed on model
       })
       .then((newUser) => {
         newUser = newUser.dataValues;
@@ -95,6 +95,10 @@ router.get('/users/contributors/:id', function (req, res, next) {
       },
       {
         model: Models.Bio,
+        include: [
+          {model: Models.FavoriteGame},
+          {model: Models.OtherWork}
+        ]
       },
     ]
   }).then(
