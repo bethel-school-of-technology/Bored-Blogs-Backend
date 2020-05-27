@@ -22,7 +22,7 @@ router.route('/users/register')
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: (req.body.password) //<--- Password is hashed on model        
+        password: (req.body.password) //<--- Password is hashed on model
       })
       .then((newUser) => {
         newUser = newUser.dataValues;
@@ -50,8 +50,11 @@ router.route('/users/login')
         res.status(404).send("User not found");
       } else if (authService.comparePasswords(req.body.password, user.password)) {
         //you'll need this for later
-        console.log(user.dataValues)
-        res.json({ ...user.dataValues, token: authService.signUser(user) });
+        //console.log(user.dataValues)
+        res.json({
+          ...user.dataValues,
+          token: authService.signUser(user)
+        });
       } else {
         res.status(418).send("authentication failed. bad password.");
       }
@@ -95,6 +98,10 @@ router.get('/users/contributors/:id', function (req, res, next) {
       },
       {
         model: Models.Bio,
+        include: [
+          {model: Models.FavoriteGame},
+          {model: Models.OtherWork}
+        ]
       },
     ]
   }).then(
