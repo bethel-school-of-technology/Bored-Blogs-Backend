@@ -9,6 +9,7 @@ const util = require('./shareFunction');
 
 const defaultErr = (err, res) => {
     // handle error;
+    console.log(err);
     res.status(500);
     res.send(err.toString());
 };
@@ -71,7 +72,7 @@ router.get('/posts/read/:postId', function (req, res) {
 })
 
 router.put('/posts/update/:postId', function (req, res) {
-    console.log(req.params.postId);
+    //console.log(req.params.postId);
     util.authenticateAdmin(req, res, (admin) => {
         Posts.findOne({
             where: {

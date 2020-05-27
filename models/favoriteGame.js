@@ -3,7 +3,7 @@ const shared = require('../shared');
 const authService = require('../services/auth'); //<--- Add authentication service
 
 module.exports = (sequelize, DataTypes) => {
-  const favoriteGame = sequelize.define('favoriteGame', {
+  const FavoriteGame = sequelize.define('favoriteGame', {
     title: {
       type: DataTypes.TEXT
     },
@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     ...shared.options
   }
   );
-  favoriteGame.associate = function (models) {
+  FavoriteGame.associate = function (models) {
     // associations can be defined here
-    favoriteGame.belongsTo(models.Bio);
+    FavoriteGame.belongsTo(models.Bio);
   };
-  return favoriteGame;
+  return FavoriteGame;
 };

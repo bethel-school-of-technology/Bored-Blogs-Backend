@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     //TODO connect Bio to OtherWork and FavoriteGame
     Bio.belongsTo(models.Users);
+    //Bio.hasMany(models.FavoriteGame);
   };
   return Bio;
 };

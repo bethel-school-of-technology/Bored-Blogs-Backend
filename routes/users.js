@@ -50,8 +50,11 @@ router.route('/users/login')
         res.status(404).send("User not found");
       } else if (authService.comparePasswords(req.body.password, user.password)) {
         //you'll need this for later
-        console.log(user.dataValues)
-        res.json({ ...user.dataValues, token: authService.signUser(user) });
+        //console.log(user.dataValues)
+        res.json({
+          ...user.dataValues,
+          token: authService.signUser(user)
+        });
       } else {
         res.status(418).send("authentication failed. bad password.");
       }
