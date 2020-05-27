@@ -31,16 +31,26 @@ router.get('/contactSubmissions', function (req, res, next) {
 });
 
 // delete a contact submission
+// router.delete("/contactSubmissions/:id", function (req, res, next) {
+//     let submissionId = parseInt(req.params.id);
+//     models.contactSubmissions
+//     .findOne 
+//         .update(
+//             { Deleted: true },
+//             {
+//                 where: { id: submissionId }
+//             }
+//         ).then(result => res.redirect("/"));
+// })
+
 router.delete("/contactSubmissions/:id", function (req, res, next) {
     let submissionId = parseInt(req.params.id);
-    models.contactSubmissions
-        .update(
-            { Deleted: true },
-            {
-                where: { id: submissionId }
-            }
-        ).then(result => res.redirect("/"));
-})
+    util.authenticateAdmin(req, res, (admin) => {
+        ContactUs.findOne({
+            where: { id: req.params.id }
+        }).then(contact => { contact.destroy().then(m=>res.json(m)) });
+    });
+});
 
 //updates a contact submission
 router.post("/contactSubmissions", function (req, res, next) {

@@ -80,26 +80,37 @@ router.route('/comments/update/:commentId')
 jacob i dont mean to be rude but u could do this
 util.authenticateAdmin(req, res, admin => { Comments.destory({ where: { commentId: +req.params.id } }) })
 */
+
 // DELETE A COMMENT BY ID (admin only)  // written by Jackie
 
 // should comments be deleted by "CommentId"? (per the code in 'comments/create' above)
-router.delete("/comments/delete/:id", function (req, res, next) {
-    let commentID = parseInt(req.params.id);
-    util.authenticateAdmin()
-    let token = req.cookies.jwt;
-    if (token) {
-        authService.verifyUser(token)
-            .then(user => {
-                if (user.Admin) {
-                    Comments.findOne({
-                        where: { id: req.params.commentId }
-                    })
-                    models.comments.update({ Deleted: true }, { where: { commentId: commentID } })
-                } else {
-                    res.send("You are not Admin. Unable to delete comment.");
-                }
-            });
-    }
-});
+// router.delete("/comments/delete/:id", function (req, res, next) {
+//     let commentID = parseInt(req.params.id);
+//     util.authenticateAdmin()
+//     let token = req.cookies.jwt;
+//     if (token) {
+//         authService.verifyUser(token)
+//             .then(user => {
+//                 if (user.Admin) {
+//                     Comments.findOne({
+//                         where: { id: req.params.commentId }
+//                     })
+//                     models.comments.update({ Deleted: true }, { where: { commentId: commentID } })
+//                 } else {
+//                     res.send("You are not Admin. Unable to delete comment.");
+//                 }
+//             });
+//     }
+// });
+
+// router.delete("/contactSubmissions/:id", function (req, res, next) {
+//     let submissionId = parseInt(req.params.id);
+//     util.authenticateAdmin(req, res, (admin) => {
+//         ContactUs.findOne({
+//             where: { id: req.params.id }
+//         }).then(contact => { contact.destroy().then(m=>res.json(m)) });
+//     });
+// });
+
 
 module.exports = router;

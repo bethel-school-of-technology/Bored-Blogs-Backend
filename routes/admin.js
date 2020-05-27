@@ -55,29 +55,29 @@ router.get('/users/list', (req, res, next) => {
 });
 
 // DO WE NEED THIS? We should only delete users, not edit them (Jacke)
-if (false) router.get('/editUser/:id', (req, res, next) => {
-    loginVibeCheck(req, res, next, user => {
-        if (user.Admin) {
-            //todo check author
-            models.users.findByPk(parseInt(req.params.id)).then(
-                userView => {
-                    models.posts.findAll({
-                        where: { UserId: userView.UserId }
-                    })
-                        .then(p => {
-                            res.render('adminUserProfile', { user: userView, post: p })
-                        })
-                }
-            )
-        } else {
-            res.status(403);
-            res.send('Unauthorized to view this page');
-        }
-    })
-});
+// if (false) router.get('/editUser/:id', (req, res, next) => {
+//     loginVibeCheck(req, res, next, user => {
+//         if (user.Admin) {
+//             //todo check author
+//             models.users.findByPk(parseInt(req.params.id)).then(
+//                 userView => {
+//                     models.posts.findAll({
+//                         where: { UserId: userView.UserId }
+//                     })
+//                         .then(p => {
+//                             res.render('adminUserProfile', { user: userView, post: p })
+//                         })
+//                 }
+//             )
+//         } else {
+//             res.status(403);
+//             res.send('Unauthorized to view this page');
+//         }
+//     })
+// });
 
 //deletes
-router.delete("/deleteUser/:id", (req, res, next) => {
+router.delete("/users/delete/:id", (req, res, next) => {
     util.authenticateAdmin(req, res, (admin) => {
         models.Users.findOne({
             where: {
@@ -86,10 +86,16 @@ router.delete("/deleteUser/:id", (req, res, next) => {
             }
         }).then(
             e => {
-                models.Users.findAll({}).then(users => res.send(users))
+                e.destroy().then(()=>{
+                    models.Users.findAll({
+                        where: {
+                            isAdmin: 0}}).then(users => res.send(users));
+                });
+                
             }
         ).catch(e => defaultErr(e, res))
     });
 });
+
 
 module.exports = router;
