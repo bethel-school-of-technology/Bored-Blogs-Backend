@@ -30,29 +30,7 @@ router.get('/contactSubmissions', function (req, res, next) {
     })
 });
 
-// delete a contact submission
-// router.delete("/contactSubmissions/:id", function (req, res, next) {
-//     let submissionId = parseInt(req.params.id);
-//     models.contactSubmissions
-//     .findOne 
-//         .update(
-//             { Deleted: true },
-//             {
-//                 where: { id: submissionId }
-//             }
-//         ).then(result => res.redirect("/"));
-// })
-
-router.delete("/contactSubmissions/:id", function (req, res, next) {
-    let submissionId = parseInt(req.params.id);
-    util.authenticateAdmin(req, res, (admin) => {
-        ContactUs.findOne({
-            where: { id: req.params.id }
-        }).then(contact => { contact.destroy().then(m=>res.json(m)) });
-    });
-});
-
-//updates a contact submission
+// Creates a contact submission (message from user)
 router.post("/contactSubmissions", function (req, res, next) {
     util.authenticateUser(req, res, (user) => {
         var form = req.body;
@@ -64,6 +42,16 @@ router.post("/contactSubmissions", function (req, res, next) {
         })
             .then(result => res.json(result))
             .catch(e => defaultErr(e, res));
+    });
+});
+
+// delete a message from the contact form submission message list
+router.delete("/contactSubmissions/delete/:id", function (req, res, next) {
+    let submissionId = parseInt(req.params.id);
+    util.authenticateAdmin(req, res, (admin) => {
+        ContactUs.findOne({
+            where: { id: req.params.id }
+        }).then(contact => { contact.destroy().then(m=>res.json(m)) });
     });
 });
 

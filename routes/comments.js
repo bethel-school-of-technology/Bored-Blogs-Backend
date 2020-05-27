@@ -11,6 +11,7 @@ const defaultErr = (err, res) => {
     res.send(err.toString());
 };
 
+// Add a comment on a specific Post
 router.route('/comments/create/:postId')
     .post(function (req, res) {
         util.authenticateUser(req, res, user => {
@@ -36,7 +37,7 @@ router.route('/comments/create/:postId')
         });
     });
 
-// is this for "Read all the comments" on a post? (Jackie)
+// Lists all the comments at the bottom of a specific post
 router.get('/comments/read/:postId', function (req, res) {
     console.log(req.params.postId);
     Comments.findAll({
@@ -54,6 +55,7 @@ router.get('/comments/read/:postId', function (req, res) {
     ).catch(e => defaultErr(e, res))
 })
 
+// Edit a comment on a specific post  // DO WE NEED THIS???? We shouldn't be editing comments
 router.route('/comments/update/:commentId')
     .post(function (req, res) {
         util.authenticateUser(req, res, user => {
@@ -76,41 +78,15 @@ router.route('/comments/update/:commentId')
         });
     });
 
-/*
-jacob i dont mean to be rude but u could do this
-util.authenticateAdmin(req, res, admin => { Comments.destory({ where: { commentId: +req.params.id } }) })
-*/
-
 // DELETE A COMMENT BY ID (admin only)  // written by Jackie
-
-// should comments be deleted by "CommentId"? (per the code in 'comments/create' above)
-// router.delete("/comments/delete/:id", function (req, res, next) {
-//     let commentID = parseInt(req.params.id);
-//     util.authenticateAdmin()
-//     let token = req.cookies.jwt;
-//     if (token) {
-//         authService.verifyUser(token)
-//             .then(user => {
-//                 if (user.Admin) {
-//                     Comments.findOne({
-//                         where: { id: req.params.commentId }
-//                     })
-//                     models.comments.update({ Deleted: true }, { where: { commentId: commentID } })
-//                 } else {
-//                     res.send("You are not Admin. Unable to delete comment.");
-//                 }
-//             });
-//     }
-// });
-
-// router.delete("/contactSubmissions/:id", function (req, res, next) {
-//     let submissionId = parseInt(req.params.id);
-//     util.authenticateAdmin(req, res, (admin) => {
-//         ContactUs.findOne({
-//             where: { id: req.params.id }
-//         }).then(contact => { contact.destroy().then(m=>res.json(m)) });
-//     });
-// });
+router.delete("/comments/delete/:id", function (req, res, next) {
+    let commentId = parseInt(req.params.id);
+    util.authenticateAdmin(req, res, (admin) => {
+        Comments.findOne({
+            where: { id: req.params.id }
+        }).then(comment => { contact.destroy().then(m=>res.json(m)) });
+    });
+});
 
 
 module.exports = router;

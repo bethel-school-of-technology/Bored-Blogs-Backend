@@ -12,8 +12,9 @@ const defaultErr = (err, res) => {
   res.send(err.toString());
 };
 
+// at http://localhost:3001/users with post
+// Creates an account for a new user 
 router.route('/users/register')
-  //create a new user at http://localhost:3001/users with post
   .post((req, res, next) => {
     //console.log(req.body)
     console.log(Users);
@@ -33,7 +34,7 @@ router.route('/users/register')
   });//end post
 
 
-
+// Log in an exisiting user
 router.route('/users/login')
   .post(function (req, res) {
     console.log("Something fishy");
@@ -76,6 +77,7 @@ router.post('/verify', function (req, res) {
   });
 });
 
+// Gets one Admin user's profile information (color style, bio, favgames, otherworks) ("Contributor Profile" pages)
 router.get('/users/contributors/:id', function (req, res, next) {
   Users.findOne({
     where: {
@@ -99,8 +101,8 @@ router.get('/users/contributors/:id', function (req, res, next) {
       {
         model: Models.Bio,
         include: [
-          {model: Models.FavoriteGame},
-          {model: Models.OtherWork}
+          { model: Models.FavoriteGame },
+          { model: Models.OtherWork }
         ]
       },
     ]
@@ -117,6 +119,7 @@ router.get('/users/contributors/:id', function (req, res, next) {
 
 });
 
+// Gets a list of all Admin users ("Meet the Contributors" page)
 router.get('/users/contributors', function (req, res, next) {
   Users.findAll({
     where: {
@@ -157,6 +160,7 @@ router.get('/users/contributors', function (req, res, next) {
 });
 
 //TODO: refactor into custom middleware
+// Gets one user's profile information for the current logged-in user
 router.get('/users/profile', function (req, res, next) {
   let token = req.headers.auth;
   console.log(token)

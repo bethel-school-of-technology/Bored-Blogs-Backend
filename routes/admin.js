@@ -76,7 +76,7 @@ router.get('/users/list', (req, res, next) => {
 //     })
 // });
 
-//deletes
+// deletes a user (Admin Only) then refreshes the list of users (without the deleted one)
 router.delete("/users/delete/:id", (req, res, next) => {
     util.authenticateAdmin(req, res, (admin) => {
         models.Users.findOne({

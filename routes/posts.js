@@ -14,12 +14,12 @@ const defaultErr = (err, res) => {
     res.send(err.toString());
 };
 
+// Get a list of all blog posts
 router.route('/posts')
     .get(function (req, res) {
         //TOD0NE joined author on author id
         Posts.findAll({
             //where: {
-
             //published: {
             //todo: find the current thing a ma bob
             //$gte: Sequelize.literal('CURRENT_TIMESTAMP')
@@ -46,14 +46,14 @@ router.route('/posts')
                 title: form.title,
                 body: form.body,
                 authorId: admin.id
-                //Jackie: do we also need createdAt date?  And are we using "preview" for anything?
-                // createdAt: createdAt
             }).then(theNewPost => {
                 res.json(theNewPost);
             }).catch(e => defaultErr(e, res))
         })
     });
 
+
+// Get a specific post 
 router.get('/posts/read/:postId', function (req, res) {
     //TODO: join author on author id
     //console.log(req.params.postId)
@@ -71,6 +71,7 @@ router.get('/posts/read/:postId', function (req, res) {
     }).catch(e => defaultErr(e, res));
 })
 
+// Update a specific post (Admin only)
 router.put('/posts/update/:postId', function (req, res) {
     //console.log(req.params.postId);
     util.authenticateAdmin(req, res, (admin) => {
@@ -103,13 +104,13 @@ router.put('/posts/update/:postId', function (req, res) {
     })
 })
 
-// DELETE A POST BY ID (admin only) // written by Jackie
+// DELETE A POST BY ID (Admin only) 
 router.delete("/posts/delete/:id", function (req, res, next) {
     let postID = parseInt(req.params.id);
     util.authenticateAdmin(req, res, (admin) => {
         Posts.findOne({
             where: { id: req.params.id }
-        }).then(post => { post.destroy().then(p=>res.json(p)) });
+        }).then(post => { post.destroy().then(p => res.json(p)) });
     });
 });
 
