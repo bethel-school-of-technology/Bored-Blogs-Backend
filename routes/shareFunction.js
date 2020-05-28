@@ -1,21 +1,38 @@
 const authService = require('../services/auth'); //<--- Add authentication service
-const Users = require('../models').Users;
-
+const Models = require('../models');
 //also could be move it elsewhere
 //TODO: rewrite this the normal way
 //needs token in headers:{auth:token}
 module.exports = {
     //to be used with sequel join
     //
-    authorDataFilter: {
-        model: Users,
-        as: 'author',
-        //we only want these field we shouldnt be giving away our hashed passwords
-        attributes: [
-            'firstName',
-            'lastName',
-        ]
-    },
+    authorDataIncludes: [
+        {
+            model: Models.Users,
+            as: 'author',
+            //we only want these field we shouldnt be giving away our hashed passwords
+            attributes: [
+                'firstName',
+                'lastName',
+            ]
+        }
+    ],
+    contribDataIncludes: [
+        {
+            model: Models.Style,
+            attributes: [
+                'background-color',
+                'color',
+            ],
+        },
+        {
+            model: Models.Bio,
+            include: [
+                { model: Models.Game },
+                { model: Models.OtherWork },
+            ]
+        },
+    ],
     //lambda is jacobism
     authenticateAdmin(req, res, lambda) {
         this.authenticateUser(req, res, user => {
@@ -36,7 +53,7 @@ module.exports = {
                         res.status(400).send(err);
                     } else {
                         //console.log(decoded)
-                        Users.findOne({
+                        Models.Users.findOne({
                             where: {
                                 id: decoded.UserId
                             }
@@ -59,5 +76,13 @@ module.exports = {
         } else {
             res.status(401).send('Must be logged in');
         }
-    }
+    },
+    defaultErr(err, res) {
+        // handle error;
+        res.status(500);
+        res.send(err.toString());
+    },
+    lowerCaseKey(object, key) {
+
+    },
 }

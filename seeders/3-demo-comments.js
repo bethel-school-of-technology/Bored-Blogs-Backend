@@ -9,81 +9,52 @@ module.exports = {
     */
     return queryInterface.bulkInsert('Comments', [
       {
-        body: 'comment test 1 for post 1',
-        parentPostId: 1,
-        authorId: 1
+        body: 'Settlers is one of my favorite games! Highly recommend it!',
+        parentPostId: 1, // Settlers of Catan
+        authorId: 7 // Kam
       },
       {
-        body: 'comment body2 for post 1',
-        parentPostId: 1,
+        body: 'I agree. Love playing Catan!',
+        parentPostId: 1, // Settlers of Catan
+        CommentId: 2,
+        authorId: 2 // Penny Coin
+      },
+      {
+        body: 'Playing Ticket to Ride on the ipad rocks. It is so much easier than the board game where all those little pieces get messed up whenever you bump the board! Lol',
+        parentPostId: 2, // Ticket to Ride
         CommentId: 1,
-        authorId: 2
+        authorId: 3 // Jerry Springer
       },
       {
-        body: 'comment body2 for post 2',
-        parentPostId: 2,
-        CommentId: null,
-        authorId: 2
+        body: 'I like playing on the ipad too, but sometimes it is more fun just to sit around the board and make those trains!',
+        parentPostId: 2, // Ticket to Ride
+        CommentId: 2,
+        authorId: 4 // Karen Black
       },
       {
-        body: 'comment test for post 2',
-        parentPostId: 2,
+        body: 'I have never really enjoyed Dixit but maybe I should give it another try.',
+        parentPostId: 3, // Dixit
         CommentId: 1,
-        authorId: 4
+        authorId: 4 // Karen Black
       },
       {
-        body: 'comment test for post 4',
-        parentPostId: 4,
+        body: 'I have never heard of this game Jungle Speed but it sounds fun. I will have to check it out.',
+        parentPostId: 4, //Jungle Speed
         CommentId: 1,
-        authorId: 3
+        authorId: 5 // Sue Ellen
       },
       {
-        body: 'comment test for post 4',
-        parentPostId: 4,
-        CommentId: null,
-        authorId: 3
+        body: 'We play this game a lot and it is really fun. Your family will enjoy it!',
+        parentPostId: 4, //Jungle Speed
+        CommentId: 2,
+        authorId: 3 // Jerry Springer
       },
       {
-        body: 'comment test for post 5',
-        parentPostId: 5,
+        body: 'Spot It is a fun family game. I recommend it!',
+        parentPostId: 5,  //Spot It
         CommentId: 1,
-        authorId: 2
-      },
-      //     id: 25,
-      //     user: "Peppy Longstocking",
-      //     body: "test comment 123 hardcoded in post-comment service",
-      //     createdAt: "05/19/2020",
-      //     parentPostId: 1,
-      //     CommentId: 1,
-      //     authorId: 7
-      // },
-      // {
-      //     id: 26,
-      //     user: "Bob Jones",
-      //     body: "comment 2 hardcoded in post-comment service",
-      //     createdAt: "03/02/2020",
-      //     parentPostId: 2,
-      //     CommentId: 1,
-      //     authorId: 1
-      //   },
-      //   {
-      //     id: 26,
-      //     user: "Bob Jones",
-      //     body: "comment 3 hardcoded in post-comment service",
-      //     createdAt: "01/28/2020",
-      //     parentPostId: 3,
-      //     CommentId: 3,
-      //     authorId: 1
-      //     },
-      //     {
-      //       id: 26,
-      //       user: "Bob Jones",
-      //       body: "comment 4 hardcoded in post-comment service",
-      //       createdAt: "05/10/2020",
-      //       parentPostId: 4,
-      //       CommentId: 2,
-      //       authorId: 1
-      //       }
+        authorId: 2 // Penny Coinn
+      }
     ],
       {
 
