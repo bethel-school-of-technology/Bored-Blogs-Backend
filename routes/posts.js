@@ -25,9 +25,8 @@ router.route('/posts')
             //$gte: Sequelize.literal('CURRENT_TIMESTAMP')
             //}
             //},
-            include: [
-                util.authorDataFilter
-            ]
+            include: util.authorDataIncludes
+
         }).then(function (mPosts) {
             res.json(mPosts)
         }).catch(e => defaultErr(e, res));
@@ -45,7 +44,7 @@ router.route('/posts')
             Posts.create({
                 title: form.title,
                 body: form.body,
-                authorId: admin.id
+                authorId: form.authorId
             }).then(theNewPost => {
                 res.json(theNewPost);
             }).catch(e => defaultErr(e, res))
@@ -54,17 +53,14 @@ router.route('/posts')
 
 
 // Get a specific post 
-router.get('/posts/read/:postId', function (req, res) {
-    //TODO: join author on author id
+router.get('/posts/:postId', function (req, res) {
     //console.log(req.params.postId)
     Posts.findOne(
         {
             where: {
                 id: req.params.postId
             },
-            include: [
-                util.authorDataFilter
-            ]
+            include: util.authorDataIncludes
         }
     ).then(function (mPosts) {
         res.json(mPosts);
@@ -72,7 +68,7 @@ router.get('/posts/read/:postId', function (req, res) {
 })
 
 // Update a specific post (Admin only)
-router.put('/posts/update/:postId', function (req, res) {
+router.put('/posts/:postId', function (req, res) {
     //console.log(req.params.postId);
     util.authenticateAdmin(req, res, (admin) => {
         Posts.findOne({
@@ -96,16 +92,15 @@ router.put('/posts/update/:postId', function (req, res) {
             updoot('authorId')
             //console.log('hello')
             //console.log(post)
-
-            post.save().then(e => {
-                res.json(e);
+            post.save().then(justOnePost => {
+                res.json(justOnePost);
             })
         }).catch(e => defaultErr(e, res))
     })
 })
 
 // DELETE A POST BY ID (Admin only) 
-router.delete("/posts/delete/:id", function (req, res, next) {
+router.delete("/posts/:id", function (req, res, next) {
     let postID = parseInt(req.params.id);
     util.authenticateAdmin(req, res, (admin) => {
         Posts.findOne({

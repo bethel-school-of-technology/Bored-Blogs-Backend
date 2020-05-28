@@ -7,7 +7,7 @@ module.exports = {
       Return a promise to correctly handle asynchronicity.
 
     */
-    return queryInterface.bulkInsert('FavoriteGames', [
+    return queryInterface.bulkInsert('Games', [
       {
         //jacob
         "title": "Space invader",
@@ -63,7 +63,7 @@ module.exports = {
       return queryInterface.bulkDelete('People', null, {});
     */
     down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('FavoriteGames', null, {});
+      return queryInterface.bulkDelete('Games', null, {});
     }
   }
 };

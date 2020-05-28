@@ -1,6 +1,5 @@
 'use strict';
 const shared = require('../shared');
-const authService = require('../services/auth'); //<--- Add authentication service
 
 module.exports = (sequelize, DataTypes) => {
   const Bio = sequelize.define('Bio', {
@@ -24,9 +23,9 @@ module.exports = (sequelize, DataTypes) => {
   );
   Bio.associate = function (models) {
     // associations can be defined here
-    //TODO connect Bio to OtherWork and FavoriteGame
     Bio.belongsTo(models.Users);
-    //Bio.hasMany(models.FavoriteGame);
+    Bio.hasMany(models.Game);
+    Bio.hasMany(models.OtherWork);
   };
   return Bio;
 };

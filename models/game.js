@@ -1,6 +1,5 @@
 'use strict';
 const shared = require('../shared');
-const authService = require('../services/auth'); //<--- Add authentication service
 
 module.exports = (sequelize, DataTypes) => {
   const Game = sequelize.define('Game', {
@@ -8,8 +7,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    //this is gonna hurt TODO: eventually
-
     ...shared.fields
   }, {
     ...shared.options

@@ -3,7 +3,7 @@ const Users = require('../models').Users;
 var express = require('express');
 var router = express.Router();
 const authService = require('../services/auth'); //<--- Add authentication service
-
+const util = require('./shareFunction');
 
 
 const defaultErr = (err, res) => {
@@ -17,7 +17,7 @@ const defaultErr = (err, res) => {
 router.route('/users/register')
   .post((req, res, next) => {
     //console.log(req.body)
-    console.log(Users);
+    // console.log(Users);
     Users
       .create({
         firstName: req.body.firstName,
@@ -37,7 +37,7 @@ router.route('/users/register')
 // Log in an exisiting user
 router.route('/users/login')
   .post(function (req, res) {
-    console.log("Something fishy");
+    // console.log("Something fishy");
     //console.log(req);
     var email = req.body.email;
     if (email == null || req.body.password == null) {
@@ -71,7 +71,7 @@ router.post('/verify', function (req, res) {
     if (err) {
       res.send(err);
     } else {
-      console.log(decoded)
+      // console.log(decoded)
       res.send("succes");
     }
   });
@@ -90,22 +90,7 @@ router.get('/users/contributors/:id', function (req, res, next) {
       'lastName',
       'url'
     ],
-    include: [
-      {
-        model: Models.Style,
-        attributes: [
-          'background-color',
-          'color',
-        ],
-      },
-      {
-        model: Models.Bio,
-        include: [
-          { model: Models.FavoriteGame },
-          { model: Models.OtherWork }
-        ]
-      },
-    ]
+    include: util.contribDataIncludes
   }).then(
     contrib => {
       contrib = contrib.dataValues;
@@ -163,27 +148,9 @@ router.get('/users/contributors', function (req, res, next) {
 // Gets one user's profile information for the current logged-in user
 router.get('/users/profile', function (req, res, next) {
   let token = req.headers.auth;
-  console.log(token)
-  if (token) {
-    //! when token expires bad things happen
-    authService.verifyUser(token,
-      (decoded) => {
-        console.log(decoded)
-        Users.findOne({
-          where: {
-            id: decoded.UserId
-          }
-        }).then(
-          user => {
-            res.json(user.dataValues)
-          }
-        ).catch(e => defaultErr(e, res))
-      }
-    );
-  } else {
-    res.status(401);
-    res.send('needs auth:token in headers');
-  }
+  util.authenticateUser(req,res,(user)=>{
+    res.json(user);//TODO: give full profile with all those extra fields  
+  });  
 });
 
 

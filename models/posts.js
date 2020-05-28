@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     //status
     published: {
       type: 'TIMESTAMP',
-      //we want to save a post but not publish it
-      //defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      //if we dont specify a published date
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       //allowNull: false
     },
     ...shared.fields
