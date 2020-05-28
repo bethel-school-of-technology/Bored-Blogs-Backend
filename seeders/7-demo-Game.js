@@ -50,7 +50,7 @@ module.exports = {
       },
       {
         //kayla
-        "title": "Blurt",
+        "title": "Dominos",
         BioId: 6,
       },
       {
