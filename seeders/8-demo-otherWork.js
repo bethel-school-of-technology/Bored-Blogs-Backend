@@ -15,38 +15,38 @@ module.exports = {
       },
       {
         //jacob linkedin
-        "link": "https://www.linkedin.com/in/jacob-stanton-10221972/",
+        "link": "https://www.linkedin.com/in/jacob-stanton-10221932/",
         BioId: 1,
       },
       {
         //jackie github
         "link": "https://github.com/Jackie-Roberts",
-        BioId: 8,
+        BioId: 2,
       },
       {
         //jackie linkedin - couldn't find her
         "link": "https://www.linkedin.com/feed/",
-        BioId: 8,
+        BioId: 2,
       },
       {
         //kamyla github
         "link": "https://github.com/kamylaandrlik",
-        BioId: 7,
+        BioId: 3,
       },
       {
         //kamyla linkedin
-        "link": "https://www.linkedin.com/in/kamyla-andrlik-6811bb6b/",
-        BioId: 7,
+        "link": "https://www.linkedin.com/in/kamyla-andrlik-4211bb4b/",
+        BioId: 3,
       },
       {
         //kayla github
         "link": "https://github.com/Kayla-D-Miller",
-        BioId: 6,
+        BioId: 4,
       },
       {
         //kayla linkedin
         "link": "https://www.linkedin.com/in/kayla-miller-km/",
-        BioId: 6,
+        BioId: 4,
       },
     ],
       {
