@@ -50,8 +50,8 @@ module.exports = {
       },
       {
         //kayla
-        "title": "Blurt",
-        bioId: 3,
+        "title": "Dominos",
+        BioId: 6,
       },
       {
         //kamyla
