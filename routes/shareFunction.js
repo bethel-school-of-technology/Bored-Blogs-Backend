@@ -28,7 +28,7 @@ module.exports = {
         {
             model: Models.Bio,
             include: [
-                { model: Models.Game },
+                { model: Models.Games },
                 { model: Models.OtherWork },
             ]
         },

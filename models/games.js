@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Games.associate = function (models) {
     // associations can be defined here
-    // Game.belongsTo(models.Bio);
+    Games.belongsTo(models.Bio);
   };
   return Games;
 };
