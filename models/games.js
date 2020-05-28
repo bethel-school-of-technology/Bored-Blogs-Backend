@@ -2,7 +2,7 @@
 const shared = require('../shared');
 
 module.exports = (sequelize, DataTypes) => {
-  const Game = sequelize.define('Game', {
+  const Games = sequelize.define('Games', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     ...shared.options
   }
   );
-  Game.associate = function (models) {
+  Games.associate = function (models) {
     // associations can be defined here
-    Game.belongsTo(models.Bio);
+    Games.belongsTo(models.Bio);
   };
-  return Game;
+  return Games;
 };

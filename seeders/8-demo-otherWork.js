@@ -15,7 +15,7 @@ module.exports = {
       },
       {
         //jacob linkedin
-        "link": "https://www.linkedin.com/in/jacob-stanton-10221972/",
+        "link": "https://www.linkedin.com/in/jacob-stanton-10221932/",
         BioId: 1,
       },
       {
@@ -35,7 +35,7 @@ module.exports = {
       },
       {
         //kamyla linkedin
-        "link": "https://www.linkedin.com/in/kamyla-andrlik-6811bb6b/",
+        "link": "https://www.linkedin.com/in/kamyla-andrlik-4211bb4b/",
         BioId: 3,
       },
       {

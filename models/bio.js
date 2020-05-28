@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   Bio.associate = function (models) {
     // associations can be defined here
     Bio.belongsTo(models.Users);
-    Bio.hasMany(models.Game);
+    Bio.hasMany(models.Games);
     Bio.hasMany(models.OtherWork);
   };
   return Bio;

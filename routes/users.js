@@ -93,10 +93,11 @@ router.get('/users/contributors/:id', function (req, res, next) {
     include: util.contribDataIncludes
   }).then(
     contrib => {
+      // console.log(contrib);
       contrib = contrib.dataValues;
-      contrib['bio'] = contrib['Bio']
+      contrib['bio'] = contrib['Bio'];
       delete contrib.Bio;
-      contrib['style'] = contrib['Style']
+      contrib['style'] = contrib['Style'];
       delete contrib.Style;
       res.json(contrib);
     }
