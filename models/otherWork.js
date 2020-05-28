@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   OtherWork.associate = function (models) {
     // associations can be defined here
-    // OtherWork.belongsTo(models.Bio);
+    OtherWork.belongsTo(models.Bio);
   };
   return OtherWork;
 };

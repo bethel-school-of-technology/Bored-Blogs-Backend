@@ -11,7 +11,7 @@ module.exports = {
       {
         //jacob
         "title": "Space invader",
-        bioId: "1",
+        bioId: 1,
       },
       {
         //jacob
@@ -51,7 +51,7 @@ module.exports = {
       {
         //kayla
         "title": "Dominos",
-        BioId: 6,
+        bioId: 3,
       },
       {
         //kamyla
