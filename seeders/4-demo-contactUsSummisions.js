@@ -16,17 +16,17 @@ module.exports = {
       {
         subject: 'Electronic Games',
         body: 'Will you post something about the old atari games please?',
-        authorId: 1
+        authorId: 5
       },
       {
         subject: 'Group Games',
         body: 'What are your suggestions on games for large groups of people.',
-        authorId: 5
+        authorId: 3
       },
       {
         subject: 'Scattagories',
         body: 'Please blog about the scattagories game',
-        authorId: 3
+        authorId: 4
       },
     ],
       {
