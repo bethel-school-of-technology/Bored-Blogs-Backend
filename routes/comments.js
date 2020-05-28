@@ -22,16 +22,16 @@ router.route('/comments/:postId')
                 parentPostId: req.params.postId,
                 CommentId: form.CommentId,
                 authorId: user.id
-            }).then(theNewComment => {                
+            }).then(theNewComment => {
                 res.json(theNewComment);
             }).catch(e => defaultErr(e, res))
         });
     })
 
-    
+
 
 // Edit a comment on a specific post  // DO WE NEED THIS???? We shouldn't be editing comments
-router.route('/comments/:commentId')
+router.route('/comments/:postId')
     // Lists all the comments at the bottom of a specific post
     .get(function (req, res) {
         console.log(req.params.postId);
@@ -46,7 +46,21 @@ router.route('/comments/:commentId')
             }
         ).catch(e => defaultErr(e, res))
     })
-    .put(function (req, res) {
+
+
+// DELETE A COMMENT BY ID (admin only)  // written by Jackie
+router.route("/comments/:id")
+    .delete(function (req, res, next) {
+        // let commentId = parseInt(req.params.id);
+        util.authenticateAdmin(req, res, (admin) => {
+            Comments.findOne({
+                where: { id: req.params.id }
+            }).then(comment => {
+                comment.destroy().then(m => res.json(m))
+            });
+        });
+    })
+    .put(function (req, res) {//todo not completed
         util.authenticateUser(req, res, user => {
             var form = req.body;
             Comments.findOne({
@@ -67,18 +81,6 @@ router.route('/comments/:commentId')
             }).catch(e => defaultErr(e, res))
         });
     });
-
-// DELETE A COMMENT BY ID (admin only)  // written by Jackie
-router.delete("/comments/:id", function (req, res, next) {
-    // let commentId = parseInt(req.params.id);
-    util.authenticateAdmin(req, res, (admin) => {
-        Comments.findOne({
-            where: { id: req.params.id }
-        }).then(comment => {
-            comment.destroy().then(m => res.json(m))
-        });
-    });
-});
 
 
 module.exports = router;
