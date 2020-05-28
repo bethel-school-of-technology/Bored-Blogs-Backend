@@ -35,7 +35,7 @@ module.exports = {
         //kayla
         "body": "Kayla was one of the Rebel Alliance’s greatest leaders, fearless on the battlefield and dedicated to ending the tyranny of the Empire.",
         //fun fact
-        "other": "Hey there, I'm Kayla, and I would love nothing more than to get 8 hours of sleep.",
+        "other": "Hey there, I'm Kayla, and I would love to get 8 hours of sleep.",
         "birthday": "06-15-1995",
         userId: 6,
       },

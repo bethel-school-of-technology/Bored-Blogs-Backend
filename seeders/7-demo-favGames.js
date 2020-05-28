@@ -15,38 +15,58 @@ module.exports = {
       },
       {
         //jacob
-        "title": "Space invader2",
+        "title": "Skyrocket",
         BioId: 1,
       },
       {
         //jacob
-        "title": "Space invader",
-        BioId: 2,
+        "title": "Shiptastic",
+        BioId: 1,
       },
       {
         //jackie
-        "title": "Space invader2",
-        BioId: 2,
+        "title": "Scattergories",
+        BioId: 8,
       },
       {
-        //jacob
-        "title": "Space invader",
-        BioId: 3,
+        //jackie
+        "title": "Monopoly",
+        BioId: 8,
       },
       {
-        //jacob
-        "title": "Space invader2",
-        BioId: 3,
+        //jackie
+        "title": "Clue",
+        BioId: 8,
       },
       {
-        //jacob
-        "title": "Space invader",
-        BioId: 4,
+        //kayla
+        "title": "Portal Town",
+        BioId: 6,
       },
       {
-        //jacob
-        "title": "Space invader2",
-        BioId: 4,
+        //kayla
+        "title": "Blurt",
+        BioId: 6,
+      },
+      {
+        //kayla
+        "title": "Blurt",
+        BioId: 6,
+      },
+      {
+        //kamyla
+        "title": "Game of Things",
+        BioId: 7,
+      },
+      {
+        //kamyla
+        "title": "Quelf",
+        BioId: 7,
+      },
+      {
+        //kamyla
+        "title": "Pandemic",
+        BioId: 7,
       },
     ],
       {

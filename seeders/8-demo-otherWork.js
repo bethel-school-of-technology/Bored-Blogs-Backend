@@ -9,64 +9,44 @@ module.exports = {
     */
     return queryInterface.bulkInsert('OtherWorks', [
       {
-        //jacob
-        "link": "https://github.com/",
+        //jacob github
+        "link": "https://github.com/zed0x5f",
         BioId: 1,
       },
       {
-        //jacob
-        "link": "https://www.linkedin.com/",
+        //jacob linkedin
+        "link": "https://www.linkedin.com/in/jacob-stanton-10221972/",
         BioId: 1,
       },
       {
-        //jacob
-        "link": "https://www.liveabout.com/yoda-in-star-wars-2957947",
-        BioId: 2,
+        //jackie github
+        "link": "https://github.com/Jackie-Roberts",
+        BioId: 8,
       },
       {
-        //jackie
-        "link": "Space invader2",
-        BioId: 2,
+        //jackie linkedin - couldn't find her
+        "link": "https://www.linkedin.com/feed/",
+        BioId: 8,
       },
       {
-        //jackie
-        "link": "Space invader",
-        BioId: 3,
+        //kamyla github
+        "link": "https://github.com/kamylaandrlik",
+        BioId: 7,
       },
       {
-        //jackie
-        "link": "Space invader2",
-        BioId: 3,
+        //kamyla linkedin
+        "link": "https://www.linkedin.com/in/kamyla-andrlik-6811bb6b/",
+        BioId: 7,
       },
       {
-        //kamyla
-        "link": "Space invader",
-        BioId: 4,
+        //kayla github
+        "link": "https://github.com/Kayla-D-Miller",
+        BioId: 6,
       },
       {
-        //kamyla
-        "link": "Space invader2",
-        BioId: 4,
-      },
-      {
-        //kamyla
-        "link": "Space invader2",
-        BioId: 4,
-      },
-      {
-        //kayla
-        "link": "Space invader2",
-        BioId: 4,
-      },
-      {
-        //kayla
-        "link": "Space invader2",
-        BioId: 4,
-      },
-      {
-        //kayla
-        "link": "Space invader2",
-        BioId: 4,
+        //kayla linkedin
+        "link": "https://www.linkedin.com/in/kayla-miller-km/",
+        BioId: 6,
       },
     ],
       {
