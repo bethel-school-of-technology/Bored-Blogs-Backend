@@ -46,7 +46,7 @@ router.post("/contactSubmissions", function (req, res, next) {
 });
 
 // delete a message from the contact form submission message list
-router.delete("/contactSubmissions/delete/:id", function (req, res, next) {
+router.delete("/contactSubmissions/:id", function (req, res, next) {
     let submissionId = parseInt(req.params.id);
     util.authenticateAdmin(req, res, (admin) => {
         ContactUs.findOne({

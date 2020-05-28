@@ -30,7 +30,7 @@ module.exports = {
             include: [
                 { model: Models.Game },
                 { model: Models.OtherWork },
-            ]
+            ],
         },
     ],
     //lambda is jacobism

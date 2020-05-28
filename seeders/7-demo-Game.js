@@ -26,47 +26,47 @@ module.exports = {
       {
         //jackie
         "title": "Scattergories",
-        BioId: 8,
+        BioId: 2,
       },
       {
         //jackie
         "title": "Monopoly",
-        BioId: 8,
+        BioId: 2,
       },
       {
         //jackie
         "title": "Clue",
-        BioId: 8,
+        BioId: 2,
       },
       {
         //kayla
         "title": "Portal Town",
-        BioId: 6,
+        BioId: 4,
+      },
+      {
+        //kayla
+        "title": "Ticket to Ride",
+        BioId: 4,
       },
       {
         //kayla
         "title": "Blurt",
-        BioId: 6,
-      },
-      {
-        //kayla
-        "title": "Blurt",
-        BioId: 6,
+        BioId: 4,
       },
       {
         //kamyla
         "title": "Game of Things",
-        BioId: 7,
+        BioId: 3,
       },
       {
         //kamyla
         "title": "Quelf",
-        BioId: 7,
+        BioId: 3,
       },
       {
         //kamyla
         "title": "Pandemic",
-        BioId: 7,
+        BioId: 3,
       },
     ],
       {

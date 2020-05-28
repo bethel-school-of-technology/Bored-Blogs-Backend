@@ -20,7 +20,7 @@ module.exports = {
         "body": "One of the most beloved and iconic DC Super Heroes of all time, Jackie has stood for nearly eighty years as a symbol of truth, justice and equality to people everywhere. Raised on the hidden island of Themyscira, also known as Paradise Island, Jackie is an Amazon, like the figures of Greek legend, and her people's gift to humanity.",
         //fun fact
         "other": "Hi, I'm Jackie, and I enjoy long weekends at the family cabin.",
-        "birthday": "11-22-1972",
+        "birthday": "07-13-1971",
         userId: 8,
       },
       {
@@ -36,7 +36,7 @@ module.exports = {
         "body": "Kayla was one of the Rebel Alliance’s greatest leaders, fearless on the battlefield and dedicated to ending the tyranny of the Empire.",
         //fun fact
         "other": "Hey there, I'm Kayla, and I would love to get 8 hours of sleep.",
-        "birthday": "06-15-1995",
+        "birthday": "06-10-1995",
         userId: 6,
       },
     ],

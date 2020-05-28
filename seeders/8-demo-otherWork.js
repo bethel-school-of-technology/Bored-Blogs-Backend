@@ -21,32 +21,32 @@ module.exports = {
       {
         //jackie github
         "link": "https://github.com/Jackie-Roberts",
-        BioId: 8,
+        BioId: 2,
       },
       {
         //jackie linkedin - couldn't find her
         "link": "https://www.linkedin.com/feed/",
-        BioId: 8,
+        BioId: 2,
       },
       {
         //kamyla github
         "link": "https://github.com/kamylaandrlik",
-        BioId: 7,
+        BioId: 3,
       },
       {
         //kamyla linkedin
         "link": "https://www.linkedin.com/in/kamyla-andrlik-6811bb6b/",
-        BioId: 7,
+        BioId: 3,
       },
       {
         //kayla github
         "link": "https://github.com/Kayla-D-Miller",
-        BioId: 6,
+        BioId: 4,
       },
       {
         //kayla linkedin
         "link": "https://www.linkedin.com/in/kayla-miller-km/",
-        BioId: 6,
+        BioId: 4,
       },
     ],
       {
