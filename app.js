@@ -9,6 +9,7 @@ var cors = require('cors');
 
 var port = 3001;
 
+
 var app = express();
 
 
@@ -23,13 +24,13 @@ app.use(cookieParser());
 app.use(session({ secret: 'perilous journey' }));
 //do we need passport when auth?
 
-
+const prefix = '/api/';
 //!registering all the endpoints here!
-app.use('/', require('./routes/admin'));
-app.use('/', require('./routes/users'));
-app.use('/', require('./routes/posts'));
-app.use('/', require('./routes/comments'));
-app.use('/', require('./routes/contactUs'));
+app.use(prefix, require('./routes/admin'));
+app.use(prefix, require('./routes/users'));
+app.use(prefix, require('./routes/posts'));
+app.use(prefix, require('./routes/comments'));
+app.use(prefix, require('./routes/contactUs'));
 
 
 
@@ -55,7 +56,7 @@ app.use(function (err, req, res, next) {
 //when we change models we have to manual adjust the db
 var flip = !false;
 
-if (true) models.sequelize.sync({ alter: !flip, force: flip }).then(function () {
+if (!true) models.sequelize.sync({ alter: !flip, force: flip }).then(function () {
   console.log("DB Sync'd up")
 });
 
