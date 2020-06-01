@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(session({ secret: 'perilous journey' }));
 //do we need passport when auth?
 
-const prefix = '/api/';
+const prefix = '/';
 //!registering all the endpoints here!
 app.use(prefix, require('./routes/admin'));
 app.use(prefix, require('./routes/users'));
