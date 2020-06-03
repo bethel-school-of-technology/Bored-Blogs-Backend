@@ -52,10 +52,16 @@ router.route('/users/login')
       } else if (authService.comparePasswords(req.body.password, user.password)) {
         //you'll need this for later
         //console.log(user.dataValues)
-        res.json({
-          ...user.dataValues,
-          token: authService.signUser(user)
-        });
+        user.lastLoggedIn = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        user.save().then(
+          u => {
+            res.json({
+              ...u.dataValues,
+              token: authService.signUser(u)
+            });
+          }
+        );
+
       } else {
         res.status(418).send("authentication failed. bad password.");
       }
@@ -149,9 +155,9 @@ router.get('/users/contributors', function (req, res, next) {
 // Gets one user's profile information for the current logged-in user
 router.get('/users/profile', function (req, res, next) {
   let token = req.headers.auth;
-  util.authenticateUser(req,res,(user)=>{
+  util.authenticateUser(req, res, (user) => {
     res.json(user);//TODO: give full profile with all those extra fields  
-  });  
+  });
 });
 
 

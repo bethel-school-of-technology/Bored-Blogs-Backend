@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(session({ secret: 'perilous journey' }));
 //do we need passport when auth?
 
-const prefix = '/api/';
+const prefix = '/';
 //!registering all the endpoints here!
 app.use(prefix, require('./routes/admin'));
 app.use(prefix, require('./routes/users'));
@@ -54,7 +54,7 @@ app.use(function (err, req, res, next) {
 //https://stackoverflow.com/questions/21105748/sequelize-js-how-to-use-migrations-and-sync
 
 //when we change models we have to manual adjust the db
-var flip = !false;
+var flip = false;
 
 if (!true) models.sequelize.sync({ alter: !flip, force: flip }).then(function () {
   console.log("DB Sync'd up")

@@ -20,7 +20,7 @@ router.route('/comments/:postId')
             Comments.create({
                 body: form.body,
                 parentPostId: req.params.postId,
-                CommentId: form.CommentId,
+                CommentId: form.commentId,
                 authorId: user.id
             }).then(theNewComment => {
                 res.json(theNewComment);
