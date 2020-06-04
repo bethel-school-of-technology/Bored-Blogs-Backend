@@ -17,6 +17,8 @@ router.route('/comments/:postId')
         util.authenticateUser(req, res, user => {
             var form = req.body;
             console.log(form);
+            if (form.commentId = "") form.commentId = null;
+            
             Comments.create({
                 body: form.body,
                 parentPostId: req.params.postId,
